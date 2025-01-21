@@ -1,0 +1,37 @@
+Types: deb
+URIs: https://apt.postgresql.org/pub/repos/apt
+Suites: focal-pgdg
+Components: main
+
+
+
+gpg --keyserver keyserver.ubuntu.com --recv-keys 16126D3A3E5C1192 
+gpg: key 16126D3A3E5C1192: public key "Ubuntu Extras Archive Automatic Signing Key <ftpmaster@ubuntu.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+-------------------------------------------------------------------------------------
+worker app developerment 
+step 1
+---------------
+command developing workerapp
+create ----rails new worker_app -d=postgresql
+and data setup user nad password 
+
+step 2
+git hub repo
+\\\\\\\\\\branch---master\\\\\\\\\
+…or create a new repository on the command line
+
+echo "# WorkerMarketplaceApplication" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/subhi006/WorkerMarketplaceApplication.git
+git push -u origin main
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/subhi006/WorkerMarketplaceApplication.git
+git branch -M main
+git push -u origin main
