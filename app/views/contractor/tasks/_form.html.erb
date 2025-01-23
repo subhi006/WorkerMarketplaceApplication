@@ -1,0 +1,36 @@
+<%= form_with model: [:contractor, @task] do |form| %>
+  <div>
+  <%=form.label :category%>
+  <%=form.text_field :category%>
+  </div>
+
+  <div>
+  <%=form.label :duration%>
+  <%=form.text_field :duration%>
+  </div>
+
+  <div>
+  <%=form.label :location%>
+  <%=form.text_field :location%>
+  </div>
+
+  <div>
+  <%=form.label :company%>
+  <%=form.text_field :company%>
+  </div>
+
+  <div>
+  <%=form.label :description%>
+  <%=form.text_field :description%>
+  </div>
+
+  <div>
+  <%=form.label :salary%>
+  <%=form.number_field :salary%>
+  </div>
+  
+  <div>
+  <%=form.submit "Save"%>
+  </div>
+<% end %>
+</div>

@@ -49,6 +49,13 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "rails-controller-testing"
+  gem "devise"
+  gem "cancancan"
+  gem "bootstrap"
+  gem "sassc-rails"
 end
 
 group :development do

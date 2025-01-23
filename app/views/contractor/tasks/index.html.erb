@@ -1,0 +1,6 @@
+
+<% @task.each do |per_task|%>
+  <%=link_to per_task.category,contractor_task_path(per_task)%>
+  <br>
+<%end%>
+<p><%= link_to "create new task",new_contractor_task_path%></p>
