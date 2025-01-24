@@ -1,0 +1,2 @@
+module Contractor::TaskHelper
+end

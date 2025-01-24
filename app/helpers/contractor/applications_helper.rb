@@ -1,0 +1,2 @@
+module Contractor::ApplicationsHelper
+end

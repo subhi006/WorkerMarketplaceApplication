@@ -1,0 +1,7 @@
+<%= render partial: "layouts/worker_header" %>
+
+<h1>List of all Tasks</h1>
+<% @task.each do |per_task|%>
+  <%=link_to per_task.category.name,worker_task_path(per_task)%>
+  <br>
+<%end%>

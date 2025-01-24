@@ -1,0 +1,184 @@
+Types: deb
+URIs: https://apt.postgresql.org/pub/repos/apt
+Suites: focal-pgdg
+Components: main
+
+
+
+gpg --keyserver keyserver.ubuntu.com --recv-keys 16126D3A3E5C1192 
+gpg: key 16126D3A3E5C1192: public key "Ubuntu Extras Archive Automatic Signing Key <ftpmaster@ubuntu.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+-------------------------------------------------------------------------------------
+date jan-21 
+
+worker app developerment 
+step 1
+---------------
+command developing workerapp
+create ----rails new worker_app -d=postgresql
+and data setup user nad password 
+
+step 2
+git hub repo
+\\\\\\\\\\branch---master\\\\\\\\\
+…or create a new repository on the command line
+
+echo "# WorkerMarketplaceApplication" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/subhi006/WorkerMarketplaceApplication.git
+git push -u origin main
+
+…or push an existing repository from the command line
+
+git remote add origin https://github.com/subhi006/WorkerMarketplaceApplication.git
+git branch -M main
+git push -u origin main
+
+date jan-22
+***-------------always step first checking branch before creating new branch and push any file
+
+step 3 ----creating a testing branch and add a rspec in application 
+
+step 4 adding a device ***have to think about it
+site--
+* https://stackoverflow.com/questions/34539508/when-using-devise-in-rails-how-do-i-add-two-different-types-of-users-that-will
+
+date jan-23
+proper_devise varification 
+step-5 user controler
+       contractor and worker bash task controller 
+
+step 5 creating models contractore worker task application
+
+step 6 writing the validation and rspec for validations
+Shoulda Matchers-gem for rspec 
+
+
+
+
+
+
+
+
+
+
+ devise_for :agents
+ devise_for :companies
+
+rails g devise User
+
+
+class Company < User
+end
+
+
+class Agent < User
+end
+
+in application_controller put this:
+devise_group :user, contains: [:agent, :company]
+
+
+
+
+
+ has_many :applications
+  has_many :tasks, through: :applications
+
+  # validations
+  validates :first_name, :last_name, :email, :phone_number, :role, presence: true
+  validates :phone_number, format: { with: /\A-?\d+\Z/ }
+  validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@gmail\.com\z/i,
+    message: "Only Gmail is allowed" }
+
+  def full_name
+    "#{first_name} #{last_name}"
+
+
+
+
+FactoryBot.define do
+  factory :contractor do
+    first_name { "M21" }
+    last_name { "sahu" }
+    email { "mishrasakshi309@gmail.com" }
+    password { "1234567" }
+    phone_number { "1231231234" }
+    role { 'contracter' }
+  end
+end
+
+
+
+Spec.describe Worker, type: :model do
+  let(:worker) { FactoryBot.build(:worker) }
+
+  describe "Associations" do
+    it { should belong_to(:task) }
+  end
+  
+  context "should validate" do
+    it "with first_name,last_name,phone_number,email,password,role" do
+      expect(worker).to be_valid
+    end
+  end
+  context "should not be validate" do
+    it "when first_name is not present" do
+      worker.first_name =nil
+      expect(worker).not_to be_valid
+    end
+    it "when last_name is not present" do
+      worker.last_name = nil
+      expect(worker).not_to be_valid
+    end
+    it "when email is not present" do
+      worker.email = nil
+      expect(worker).not_to be_valid
+    end
+    it "when password is not present" do
+      worker.password = nil
+      expect(worker).not_to be_valid
+    end
+    it "when  is phone_number not present" do
+      worker.phone_number = nil
+      expect(worker).not_to be_valid
+    end
+    it "when  is role not present" do
+      worker.role = nil
+      expect(worker).not_to be_valid
+    end
+  end
+
+  context "phone_number" do
+    it "is not valid without a phone number" do
+      worker.phone_number = nil
+      expect(worker).to_not be_valid
+    end
+    it "is not valid if the phone number is not 10 chars" do
+      expect(worker.phone_number.length).to eq(10)
+    end
+    it "is not valid if the phone number is not all digit" do
+      expect(worker.phone_number.match?(/\A-?\d+\Z/)).to eq(true)
+    end
+  end
+
+  context "email" do
+    it "shoud not have proper formate" do
+      # worker.email = nil
+      expect(worker.email.match?(/\A[\w+\-.]+@gmail\.com\z/i)).to eq(true)
+    end
+  end
+
+
+
+
+
+-----------------------
+worker
+git remote add location  https://github.com/subhi006/worker.git
+git commit -m "initial worker_marketplace_application"
+git push -u location main
