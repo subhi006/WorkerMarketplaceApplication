@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :category, "Category", class: "form-label" %>
-            <%= form.select :category,  Category.all.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
+            <%= form.select :category,  @categories.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
           </div>
         </div>
         <div class="col-md-6">

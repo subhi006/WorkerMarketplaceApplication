@@ -1,9 +1,8 @@
 <%= render partial: "layouts/con_header" %>
-
-<%# <h1>Applications for <%= task.name</h1> %> 
 <p><strong>Applications for</strong> <%= @task.category.name %></p>
-<%# <p><strong>Description:</strong> <%= task.description %></p> 
-
+<p><strong>Company:</strong> <%= @task.company %></p> 
+<p><strong>Location:</strong> <%= @task.location %></p> 
+<%# <%debugger%> 
 <% if @application.present? %>
   <table class="table table-bordered table-striped">
     <thead>
@@ -21,9 +20,9 @@
       <% @application.each_with_index do |application, index| %>
         <tr>
           <td><%= index + 1 %></td>
-          <td><%= application.worker.name %></td>
-          <td><%= application.worker.contact_info %></td>
-          <td><%= application.worker.skills || "Not Provided" %></td>
+          <td><%= application.worker.full_name %></td>
+          <td><%= application.worker.phone_number %></td>
+          <%# <td><%= application.worker.skills || "Not Provided" %></td> %>
           <td><%= application.created_at.strftime("%d %b %Y") %></td>
           <td><%= application.status || "Pending" %></td>
           <td>

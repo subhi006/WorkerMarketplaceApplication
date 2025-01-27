@@ -1,10 +1,6 @@
 class Task < ApplicationRecord
+  # Associations
   belongs_to :category
-  belongs_to :user
-  has_many :applications
-  # has_many :user, through: :applications
-  # has_many :user, through: :applications
-
   belongs_to :contractor, class_name: "User"
   has_many :workers, through: :applications
   has_many :applications, dependent: :destroy
@@ -12,7 +8,8 @@ class Task < ApplicationRecord
   enum :status, [ :available, :notavailable ]
 
   # after_create :send_creation_notification
-
+  # Validations
+  validates :salary, :company, :location, presence: true
   def current_status
      if number_of_position <= 0
        status = "not_available"
@@ -23,11 +20,8 @@ class Task < ApplicationRecord
   scope :application_count, lambda {
     left_joins(:applications)
       .group("tasks.id")
-      .order("COUNT(applications.id) ")
+      .order("COUNT(applications.id)")
     }
-   def applications_count_or_default
-      applications_count || 0
-   end
 
   # def send_creation_notification
   #   Notification.create(
