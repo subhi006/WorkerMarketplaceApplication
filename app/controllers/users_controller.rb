@@ -38,6 +38,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.jso
   def edit
+    @user = current_user
   end
 
   def update

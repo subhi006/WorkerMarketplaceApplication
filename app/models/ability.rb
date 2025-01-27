@@ -4,6 +4,19 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||=User.new
+
+    if user.worker?
+      can :read, Task
+      can :apply, Task
+    end
+    if user.contractor?
+      can :create, Task
+      can :update, Task, contractor_id: user.id
+      can :destroy, Task, contractor_id: user.id
+      can :read, Task
+      can :manage, User  # Contractors can manage workers' applications
+    end
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

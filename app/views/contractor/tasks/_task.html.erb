@@ -7,3 +7,15 @@
 <p> Company: <%task.company%> </p>
 <p> Description <%=task.description%> </p>
 <p>View Application  <%=link_to "..."%> </p>
+<%# <h1>Task Details</h1> %>
+
+<div class="card p-3 mb-3 shadow-sm">
+  <p><strong>Task Category:</strong> <%= task.category.name %></p>
+  <p><strong>Duration:</strong> <%= task.duration %></p>
+  <p><strong>Location:</strong> <%= task.location %></p>
+  <p><strong>Sift Timing:</strong> <%= task.sift %></p>
+  <p><strong>Sift Hours:</strong> <%= task.sift_hours %></p>
+  <p><strong>Job Mode:</strong> <%= task.job_mode %></p>
+  <p><strong>Company:</strong> <%= task.company %></p>
+  <p><strong>Description:</strong> <%= task.description %></p>
+</div>

@@ -10,8 +10,14 @@
     <br>
 <%end%>
 </ul>
+<<<<<<< HEAD
 
 <p><%= link_to "create new task",new_contractor_task_path%></p>
+=======
+<% if can? :create, Task %>
+  <p><%= link_to "create new task",new_contractor_task_path%></p>
+<% end %>
+>>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
 <p><%=link_to "go  to home page",root_path%></p>
 
 <%= render partial: "layouts/con_footer"%>

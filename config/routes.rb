@@ -22,6 +22,15 @@ Rails.application.routes.draw do
     resources :tasks, only: [ :index, :show ]
     resources :applications
   end
+
+
+  resources :applications do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
