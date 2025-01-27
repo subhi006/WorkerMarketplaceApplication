@@ -4,15 +4,14 @@ class Contractor::TasksController < ApplicationController
   def index
     @task = Task.all
   end
+  def show
+  end
   def new
-    @task = [ Task.new, Category.all ]
+    @task = Task.new
   end
   def create
-    # debugger
+    debugger
     @task = Task.new(task_params)
-    if @task.save
-      # @task=Task.last
-      redirect_to contractor_tasks_path
     authorize! :create, @task
     if @task.save
       # @task=Task.last
@@ -21,34 +20,12 @@ class Contractor::TasksController < ApplicationController
       render :new, notice: "retry to create task"
     end
   end
-  def show
-    @task = Task.find(params[:id])
-  end
   def edit
-    @task = Task.find(params[:id])
   end
   def update
     @task =Task.find(params[:id])
     if @task.update(task_params)
       redirect_to contractor_tasks_path
-    end
-  end
-
-  private
-  def task_params
-    data=params.expect(task: [ :category, :duration, :location, :company, :description, :salary ])
-    data[:category]=Category.find(data[:category].to_i)
-    data[:user_id]=current_user.id
-    authorize! :read, @task
-  end
-  def edit
-  end
-  def update
-    authorize! :update, @task
-    if @task.update(task_params)
-      redirect_to contractor_tasks_path, notice: "Task was succeddfully updated."
-    else
-      render :edit, notice: "retry to update task"
     end
   end
 
@@ -65,7 +42,6 @@ class Contractor::TasksController < ApplicationController
     data=params.expect(task: [ :category, :duration, :location, :company, :description, :salary, :sift, :sift_hours, :mood ])
     data[:category]=Category.find(data[:category].to_i)
     data[:contractor_id]=current_user.id
->>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
     data
   end
 end

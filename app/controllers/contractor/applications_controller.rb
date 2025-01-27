@@ -1,8 +1,4 @@
 class Contractor::ApplicationsController < ApplicationController
-  def index
-    @applied = Application.all
-  end
-  def show 
   before_action :set_application, only: [ :approve, :reject ]
 
   def index
@@ -35,6 +31,5 @@ class Contractor::ApplicationsController < ApplicationController
 
   def set_application
     @application = TaskApplication.find(params[:id])
->>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
   end
 end

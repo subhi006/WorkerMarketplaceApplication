@@ -4,7 +4,6 @@ class Task < ApplicationRecord
   has_many :applications
   # has_many :user, through: :applications
   # has_many :user, through: :applications
-  enum :status, [ :available, :notavailable ]
 
   belongs_to :contractor, class_name: "User"
   has_many :workers, through: :applications

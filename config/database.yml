@@ -14,10 +14,7 @@
 #
 default: &default
   adapter: postgresql
-<<<<<<< HEAD
-=======
   host: localhost
->>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -26,7 +23,6 @@ default: &default
 
 development:
   <<: *default
-  database: worker_app_development
   database: worker_app
   username: developer
   password: developer

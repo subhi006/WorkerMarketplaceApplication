@@ -1,49 +1,12 @@
-<div class="row g-3">
-<%= form_with model: [:contractor, @task.first] do |form| %>
-<div class="row">
-  <div class="mb-3">
-   <%=form.label :category%>
-   <%= form.select :category,@task.last.map { |i| [i.name, i.id] } %>  </div>
-  <div class="mb-3">
-  <%=form.label :duration%>
-  <%=form.text_field :duration%> 
-   </div>
-</div>
-<div class="row">
-  <div class="mb-3">
-   <%=form.label :location%>
-  <%=form.text_field :location%>
-  </div>
-  <div class="mb-3">
-  <%=form.label :company%>
-  <%=form.text_field :company%>
-   </div>
-</div>
-<div class="row">
-  <div class="mb-3">
-  <%=form.label :description%>
-  <%=form.text_field :description%>
-  </div>
-  <div class="mb-3">
-  <%=form.label :salary%>
-  <%=form.number_field :salary%>
-   </div>
-</div>
-<div class="mb-3">
-  <%=form.submit "Save"%>
-  </div>
-<% end %>
-</div>
-
 <div class="container mt-4">
-  <%= form_with model: [:contractor, @task.first], local: true, class: 'needs-validation' do |form| %>
+  <%= form_with model: [:contractor, @task], local: true, class: 'needs-validation' do |form| %>
     <div class="card shadow-sm p-4">
       <!-- Row 1 -->
       <div class="row g-3">
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :category, "Category", class: "form-label" %>
-            <%= form.select :category, @task.last.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
+            <%= form.select :category,  Category.all.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
           </div>
         </div>
         <div class="col-md-6">

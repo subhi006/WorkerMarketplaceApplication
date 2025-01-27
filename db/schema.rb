@@ -10,16 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[8.0].define(version: 2025_01_24_095041) do
-=======
 ActiveRecord::Schema[8.0].define(version: 2025_01_26_172811) do
->>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "applications", force: :cascade do |t|
-<<<<<<< HEAD
+
     t.bigint "user_id"
     t.bigint "task_id"
     t.string "stage"
@@ -27,7 +23,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_172811) do
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_applications_on_task_id"
     t.index ["user_id"], name: "index_applications_on_user_id"
-=======
+
     t.bigint "task_id"
     t.string "status"
     t.datetime "created_at", null: false
@@ -35,7 +31,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_172811) do
     t.bigint "worker_id", null: false
     t.index ["task_id"], name: "index_applications_on_task_id"
     t.index ["worker_id"], name: "index_applications_on_worker_id"
->>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
   end
 
   create_table "categories", force: :cascade do |t|

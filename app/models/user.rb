@@ -12,12 +12,11 @@ class User < ApplicationRecord
   # has_one :contractor
   has_many :tasks
   has_many :applications
-=======
   # associations
   has_many :tasks, foreign_key: :contractor_id
   has_many :applications, foreign_key: :worker_id
   has_many :applied_task, through: :applications, source: :task
-  has_one :profile, dependent: :destroy 
+  has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
   # validations
   validates :email, presence: true, uniqueness: true

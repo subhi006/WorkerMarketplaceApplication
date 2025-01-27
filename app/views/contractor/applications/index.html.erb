@@ -1,8 +1,5 @@
 <%= render partial: "layouts/con_header" %>
 <p>Applications</p>
-<%=@applied.each do |can|%>
- <%= link_to can.task.category.name %>
-<%end%>
 <% if @task.present? %>
   <h1>All Tasks</h1>
   <table class="table table-bordered table-striped">

@@ -1,38 +1,6 @@
 <%= render partial: "layouts/con_header" %>
-<<<<<<< HEAD
-<p>hii
+
+<p>
     <%= render partial: "task", locals: { task: @task } %>
     <%= link_to "Edit",edit_contractor_task_path%>
 </p>
-
-
-
-
-
-
-
-
-
-
-
-=======
-
-<div class="container mt-4">
-  <div class="card shadow-sm p-4">
-    <% if can? :read, @task %>
-      <h2>Task Details</h2>
-      <div class="mb-3">
-        <%= render partial: "task", locals: { task: @task } %>
-      </div>
-    <% end %>
-
-    <div class="d-flex justify-content-between mt-3">
-      <% if can? :update, @task %>
-        <%= link_to "Edit Task", edit_contractor_task_path(@task), class: "btn btn-warning btn-sm" %>
-      <% end %>
-      
-     <%= link_to "Applicant", contractor_application_path(@task), class: "btn btn-secondary btn-sm" %>
-    </div>
-  </div>
-</div>
->>>>>>> c8b23a8 (create task Application feature and cancan gem setup)
