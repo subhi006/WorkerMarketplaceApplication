@@ -2,7 +2,11 @@ class Contractor::TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_contractor, only: [ :show, :edit, :update, :destroy ]
   def index
-    @task = current_user.tasks.all
+    @task = current_user.tasks.application_count
+    if @task.nil?
+      flash[:alert] = "Task not found."
+      redirect_to contractor_tasks_path
+    end
   end
   def show
   end
@@ -50,12 +54,12 @@ class Contractor::TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    data=params.expect(task: [ :category, :duration, :location, :company, :description, :salary, :sift, :sift_hours, :job_mode ])
+    data=params.expect(task: [ :category, :duration, :location, :company, :description, :salary, :sift, :sift_hours, :job_mode, :experience ])
     data[:category]=Category.find(data[:category].to_i)
     data[:contractor_id]=current_user.id
     data
   end
   def update_task_params
-    params.expect(task: [ :duration, :location, :company, :description, :salary, :sift, :sift_hours, :job_mode ])
+    params.expect(task: [ :duration, :location, :company, :description, :salary, :sift, :sift_hours, :job_mode, :experience ])
   end
 end

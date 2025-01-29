@@ -32,10 +32,10 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = current_user.profile
+    @profile = Profile.find_by(user_id: params[:id])
   end
 
   def profile_params
-    params.require(:profile).permit(:name, :bio, :contact_info, :address, :avatar)
+    params.require(:profile).permit(:name, :bio, :contact_info, :address, :avatar, :experience)
   end
 end

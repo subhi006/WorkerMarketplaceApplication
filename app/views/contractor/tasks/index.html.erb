@@ -8,6 +8,7 @@
         <th>Task Name</th>
         <th>Company</th>
         <th>Location</th>
+         <th>Number of Applications</th>
       </tr>
     </thead>
     <tbody>
@@ -24,12 +25,18 @@
          <%= per_task.location%>
         </td>
         <td>
+          <%= per_task.applications.count || "0" %>
+        </td>
+        <td>
             <%= link_to "view", contractor_task_path(per_task), class: "btn btn-success btn-sm", method: :patch %>
         <% if can? :update, Task %>
            <% if per_task.unavailable?%>
              <%= button_to "post",task_post_contractor_task_path(per_task), formmethod: :post, data: { confirm: "Are you sure?" } %>
            <%end%>
         <%end%>
+        </td>
+        <td>
+            <%= link_to "Applicant",  contractor_application_path(per_task), class: "btn btn-secondary btn-sm" %>
         </td>
       </tr>
       <%end%>

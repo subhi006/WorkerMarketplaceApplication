@@ -36,21 +36,8 @@
       </div>
 
       <!-- Row 3 -->
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="mb-3">
-            <%= form.label :description, "Description", class: "form-label" %>
-            <%= form.text_area :description, class: "form-control", rows: 3, placeholder: "Enter job description" %>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="mb-3">
-            <%= form.label :salary, "Salary", class: "form-label" %>
-            <%= form.number_field :salary, class: "form-control", placeholder: "Enter salary in INR" %>
-          </div>
-        </div>
-
         <!-- Shift Timing and Hours -->
+      <div class="row g-3">
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :sift, "Shift Timing", class: "form-label" %>
@@ -68,7 +55,13 @@
           </div>
         </div>
       </div>
-
+      <div class="row g-3">
+         <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :experience, "Experience", class: "form-label" %>
+            <%= form.number_field :experience, class: "form-control", placeholder: "Enter experience (e.g., 1 year)" %>
+          </div>
+        </div>
       <!-- Job Mode -->
       <div class="col-md-6">
         <div class="mb-3">
@@ -79,7 +72,22 @@
             class: "form-select" %>
         </div>
       </div>
+     </div>
 
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :description, "Description", class: "form-label" %>
+            <%= form.text_area :description, class: "form-control", rows: 3, placeholder: "Enter job description" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :salary, "Salary", class: "form-label" %>
+            <%= form.number_field :salary, class: "form-control", placeholder: "Enter salary in INR" %>
+          </div>
+        </div>
+      </div>
       <!-- Submit Button -->
       <div class="row g-3">
         <div class="col-12 text-end">

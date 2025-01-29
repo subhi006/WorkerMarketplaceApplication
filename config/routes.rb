@@ -20,9 +20,9 @@ Rails.application.routes.draw do
          end
     end
     resources :applications, only: [ :index, :show ] do
-      collection do
-        patch :approve
-        patch :reject
+      member do
+        get :approve
+        get :reject
       end
     end
   end

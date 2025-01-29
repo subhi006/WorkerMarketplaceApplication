@@ -18,7 +18,7 @@ class Task < ApplicationRecord
   end
 
   scope :application_count, lambda {
-    where(status: 1).left_joins(:applications)
+    left_joins(:applications)
       .group("tasks.id")
       .order("COUNT(applications.id)")
     }

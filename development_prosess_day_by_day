@@ -185,3 +185,5 @@ git push -u location main
 token ====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
 
 ===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
+
+git remote set-url origin https://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@github.com/subhi006/WorkerMarketplaceApplication

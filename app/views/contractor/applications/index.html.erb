@@ -1,28 +1,54 @@
 <%= render partial: "layouts/con_header" %>
-<p>Applications</p>
-<% if @task.present? %>
-  <h1>All Tasks</h1>
+<%# <%debugger%>
+<div>
+<%= search_form_for [:contractor, @q], remote: true do |f| %>
+          <div class="d-flex align-items-center">
+            <div class="me-2">
+              <%= f.label :experience_cont, 'Experience' %>
+              <%= f.text_field :experience_cont, class: "form-control" %>
+            </div>
+          </div>
+          <div>
+              <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+<% end %>
+</div>
+
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th>Task Name</th>
-        <th>Number of Applications</th>
+        <th>#</th>
+        <th>Candidate Name</th>
+        <th>Experience</th>
+        <th>Contact Info</th>
+        <th>Application Date</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <% @task.each do |task| %>
+      <% @application.each_with_index do |application, index| %>
         <tr>
-          <td><%= task.category.name %></td>
-          <td><%= task.applications.count || "0" %></td>
-          <td>
-            <%= link_to "Task", contractor_task_path(task), class: "btn btn-primary btn-sm" %>
-            <%= link_to "Applicant", contractor_application_path(task), class: "btn btn-secondary btn-sm" %>
+          <td><%= index + 1 %></td>
+          <td><%= application.worker.full_name %></td>
+          <td><%= application.worker.profile.experience %></td>
+          <td><%= application.worker.phone_number %></td>
+          <%# <td><%= application.worker.skills || "Not Provided" %></td> %>
+          <td><%= application.created_at.strftime("%d %b %Y") %></td>
+         
+            <%if application.applied?%>
+           <td>
+               <%= link_to "Approve",approve_contractor_application_path(application), class: "btn btn-success btn-sm", method: :patch %>
+               <%= link_to "Reject", reject_contractor_application_path(application), class: "btn btn-danger btn-sm", method: :patch %>
+           <%else%>
+               <td><%= application.status%></td>
+             <td>
+            <%end%>
+             <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
           </td>
         </tr>
-      <% end %>
+        <%end%>
     </tbody>
   </table>
-<% else %>
-  <p>No tasks available. Please check back later!</p>
-<% end %>
+
+
 

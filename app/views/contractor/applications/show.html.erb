@@ -2,13 +2,29 @@
 <p><strong>Applications for</strong> <%= @task.category.name %></p>
 <p><strong>Company:</strong> <%= @task.company %></p> 
 <p><strong>Location:</strong> <%= @task.location %></p> 
-<%# <%debugger%> 
+<%# <%debugger%>
+<div>
+<%= search_form_for [:worker, @q], remote: true do |f| %>
+          <div class="d-flex align-items-center">
+            <div class="me-2">
+              <%= f.label :experience_cont, 'Experience' %>
+              <%= f.text_field :experience_cont, class: "form-control" %>
+            </div>
+          </div>
+          <div>
+              <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+<% end %>
+</div>
+
+
 <% if @application.present? %>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>#</th>
         <th>Candidate Name</th>
+        <th>Experience</th>
         <th>Contact Info</th>
         <th>Application Date</th>
         <th>Status</th>
@@ -19,6 +35,7 @@
         <tr>
           <td><%= index + 1 %></td>
           <td><%= application.worker.full_name %></td>
+          <td><%= application.worker.profile.experience %></td>
           <td><%= application.worker.phone_number %></td>
           <%# <td><%= application.worker.skills || "Not Provided" %></td> %>
           <td><%= application.created_at.strftime("%d %b %Y") %></td>

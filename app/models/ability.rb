@@ -11,6 +11,9 @@ class Ability
       can :apply, Task
       can :create, Application, worker_id: user.id
       can :read, Application, worker_id: user.id
+      can :create, Profile, worker_id: user.id
+      can :read, Profile, contractor_id: user.id
+      can :update, Profile, contractor_id: user.id
     end
     if user.contractor?
       can :create, Task
@@ -19,6 +22,9 @@ class Ability
       can :read, Task
       can :manage, Application, task: { contractor_id: user.id }  # Contractors can manage workers' applications
       can :read, Application
+      can :create, Profile, contractor_id: user.id
+      can :read, Profile, contractor_id: user.id
+      can :update, Profile, contractor_id: user.id
     end
     # Define abilities for the user here. For example:
     #

@@ -41,6 +41,12 @@
             <%= form.file_field :avatar, class: "form-control", rows: 3, placeholder: "Enter photo URL" %>
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :experience, "Experience", class: "form-label" %>
+            <%= form.number_field :experience, class: "form-control", placeholder: "Enter experience (e.g., 1 year)" %>
+          </div>
+        </div>
       </div>
 
       <!-- Submit Button -->

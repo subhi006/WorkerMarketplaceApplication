@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_28_120400) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_29_070625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -80,6 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_120400) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "experience"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -99,6 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_28_120400) do
     t.bigint "contractor_id"
     t.integer "applications_count"
     t.integer "status"
+    t.integer "experience"
     t.index ["category_id"], name: "index_tasks_on_category_id"
     t.index ["contractor_id"], name: "index_tasks_on_contractor_id"
   end

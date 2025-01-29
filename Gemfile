@@ -60,6 +60,7 @@ group :development, :test do
   gem "bootstrap", "~> 5.3.3"
   gem "image_processing"
   gem "ruby-vips"
+  gem "ransack", github: "activerecord-hackery/ransack"
 end
 
 group :development do

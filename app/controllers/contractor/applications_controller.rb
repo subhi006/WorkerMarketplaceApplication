@@ -2,34 +2,29 @@ class Contractor::ApplicationsController < ApplicationController
   before_action :set_application, only: [ :approve, :reject ]
 
   def index
-    @task = current_user.tasks.application_count
-    if @task.nil?
-      flash[:alert] = "Task not found."
-      redirect_to contractor_tasks_path
-    end
+    # debugger
+    @q = Application.ransack(params[:q])
+    @application = @q.result
   end
   def show
     @task = Task.find(params[:id])
-    @application = @task.applications.includes(:worker)
+    @t= @task.applications.includes(:worker)
+    @q = @t.ransack(params[:q])
+    @application = @q.result
   end
-  # def index
-  #   @task = Task.find(params[:task_id])
-  #   @applications = @task.task_applications.includes(:worker)
-  # end
-
   def approve
-    @application.update(status: "Approved")
-    redirect_to task_applications_path(@application.task), notice: "Application approved successfully."
+    @application.update(status: "approved")
+    redirect_to contractor_applications_path, notice: "Application approved successfully."
   end
 
   def reject
-    @application.update(status: "Rejected")
-    redirect_to task_applications_path(@application.task), alert: "Application rejected successfully."
+    @application.update(status: "rejected")
+    redirect_to  contractor_applications_path, alert: "Application rejected successfully."
   end
 
   private
 
   def set_application
-    @application = TaskApplication.find(params[:id])
+    @application = Application.find(params[:id])
   end
 end

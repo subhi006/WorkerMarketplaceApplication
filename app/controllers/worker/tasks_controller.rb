@@ -1,6 +1,8 @@
 class Worker::TasksController < ApplicationController
   def index
-    @task = Task.search(params[:search])
+    @q =  Task.ransack(params[:q])
+    @task = @q.result
+    # @task = Task.search(params[:search])
   end
 
   def show

@@ -1,4 +1,28 @@
 <%= render partial: "layouts/worker_header" %>
+<%# search sector %>
+<div>
+<%= search_form_for [:worker, @q], remote: true do |f| %>
+          <div class="d-flex align-items-center">
+            <div class="me-2">
+              <%= f.label :location_cont, 'Location' %>
+              <%= f.text_field :location_cont, class: "form-control" %>
+            </div>
+            <div class="me-2">
+              <%= f.label :company_cont, 'Company' %>
+              <%= f.text_field :company_cont, class: "form-control" %>
+            </div>
+            <div class="me-2">
+              <%= f.label :category_id_eq, "Category" %>
+              <%= f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: true }, class: "form-select" %>
+            </div>
+            <div>
+              <%= f.submit "Search", class: "btn btn-primary" %>
+            </div>
+          </div>
+<% end %>
+</div>
+<p id="notice"><%= notice %></p>
+<%# task view %>
 <h1>List of all Task</h1>
 <table class="table table-bordered table-striped">
     <thead>
