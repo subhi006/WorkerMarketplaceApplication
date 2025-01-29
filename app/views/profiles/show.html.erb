@@ -1,0 +1,10 @@
+<h1>Profile</h1>
+<p><%= @profile.avatar %></p>
+<p><strong>User name:</strong> <%= @profile.name %></p>
+<p><strong>Address:</strong> <%= @profile.address %></p> 
+<p><strong>Bio:</strong> <%= @profile.bio %></p> 
+<p>Name:<%=current_user.full_name%></p>
+<p>Phone Number:<%=current_user.phone_number%></p>
+<p>Role :<%=current_user.role%></p>
+<p><%=link_to "Edit Profile", edit_profile_path(current_user)%> </p>
+<p><%=link_to "Home Page", root_path%> </p>

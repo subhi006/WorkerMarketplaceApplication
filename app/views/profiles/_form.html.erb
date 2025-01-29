@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <%= form_with model: profile, local: true, class: 'needs-validation' do |form| %>
+    <div class="card shadow-sm p-4">
+      <!-- Row 1 -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :name, "User Name", class: "form-label" %>
+            <%= form.text_field :name, class: "form-control", placeholder: "Enter user name (e.g., John Doe)" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :bio, "Bio", class: "form-label" %>
+            <%= form.text_field :bio, class: "form-control", placeholder: "Enter bio (e.g., Developer)" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :contact_info, "Contact Info", class: "form-label" %>
+            <%= form.text_field :contact_info, class: "form-control", placeholder: "Enter contact info" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :address, "Address", class: "form-label" %>
+            <%= form.text_field :address, class: "form-control", placeholder: "Enter address" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :avatar, "Avatar", class: "form-label" %>
+            <%= form.file_field :avatar, class: "form-control", rows: 3, placeholder: "Enter photo URL" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="row g-3">
+        <div class="col-12 text-end">
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

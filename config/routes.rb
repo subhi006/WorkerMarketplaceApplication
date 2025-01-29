@@ -14,23 +14,29 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   namespace :contractor do
-    resources :tasks
-    resources :applications, only: [ :index, :show ]
-  end
-
-  namespace :worker do
-    resources :tasks, only: [ :index, :show ]
-    resources :applications
-  end
-
-
-  resources :applications do
-    member do
-      patch :approve
-      patch :reject
+    resources :tasks do
+         member do
+            post :task_post
+         end
+    end
+    resources :applications, only: [ :index, :show ] do
+      collection do
+        patch :approve
+        patch :reject
+      end
     end
   end
 
+  namespace :worker do
+    resources :tasks, only: [ :index, :show ] do
+      resources :applications, only: [ :create ]
+      member do
+        get :search
+      end
+    end
+    resources :applications, only: [ :index, :show ]
+  end
+  resources :profiles
   # Defines the root path route ("/")
   # root "posts#index"
 end

@@ -1,15 +1,40 @@
 <%= render partial: "layouts/con_header" %>
 
 <h1>List of all Task</h1>
-
-<ul class="list-group">
-  <% @task.each do |per_task|%>
-  <li class="list-group-item">
-    <%=link_to per_task.category.name,contractor_task_path(per_task)%>
-  </li>
-    <br>
-<%end%>
-</ul>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Task Name</th>
+        <th>Company</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @task.each_with_index do |per_task, index|%>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td>
+          <%=per_task.category.name%>
+        </td>
+        <td>
+         <%= per_task.company%>
+        </td>
+        <td>
+         <%= per_task.location%>
+        </td>
+        <td>
+            <%= link_to "view", contractor_task_path(per_task), class: "btn btn-success btn-sm", method: :patch %>
+        <% if can? :update, Task %>
+           <% if per_task.unavailable?%>
+             <%= button_to "post",task_post_contractor_task_path(per_task), formmethod: :post, data: { confirm: "Are you sure?" } %>
+           <%end%>
+        <%end%>
+        </td>
+      </tr>
+      <%end%>
+      </tbody>
+</table>
 <% if can? :create, Task %>
   <p><%= link_to "create new task",new_contractor_task_path%></p>
 <% end %>

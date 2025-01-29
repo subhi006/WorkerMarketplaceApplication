@@ -1,8 +1,19 @@
-<h1>Task details</h1>
-<p>Task Category: <%=task.category.name %> </p>
-<p>Duration: <%=task.duration%> </p>
-<p> Location: <%=task.location%> </p>
-<%# <p> Sift Timing: <%task.sift_time%> </p> 
-<p> Company: <%task.company%> </p>
-<p> Description <%=task.description%> </p>
-<p>Apply  <%=link_to "..."%> </p>
+<div class="card p-3 mb-3 shadow-sm">
+  <p><strong>Task Category:</strong> <%= task.category.name %></p>
+  <p><strong>Duration:</strong> <%= task.duration %></p>
+  <p><strong>Location:</strong> <%= task.location %></p>
+  <p><strong>Sift Timing:</strong> <%= task.sift %></p>
+  <p><strong>Sift Hours:</strong> <%= task.sift_hours %></p>
+  <p><strong>Job Mode:</strong> <%= task.job_mode %></p>
+  <p><strong>Company:</strong> <%= task.company %></p>
+  <p><strong>Description:</strong> <%= task.description %></p>
+<% if can? :apply, task %>
+<% if task.id.in?current_user.applications.pluck(:task_id)%>
+     <p><strong>Applied successfully</strong></p>
+<%else%> 
+  <%= form_with url: worker_task_applications_path(task), method: :post do %>
+    <%= submit_tag 'Apply for this Task' %>
+  <% end %>
+<% end %>
+<% end %>
+</div>

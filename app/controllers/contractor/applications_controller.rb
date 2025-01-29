@@ -2,15 +2,15 @@ class Contractor::ApplicationsController < ApplicationController
   before_action :set_application, only: [ :approve, :reject ]
 
   def index
-    @task = Task.application_count
+    @task = current_user.tasks.application_count
     if @task.nil?
       flash[:alert] = "Task not found."
-      redirect_to contractor_tasks_path # Redirect to a fallback path (like the index page)
+      redirect_to contractor_tasks_path
     end
   end
   def show
     @task = Task.find(params[:id])
-    @applications = @task.applications.includes(:worker)
+    @application = @task.applications.includes(:worker)
   end
   # def index
   #   @task = Task.find(params[:task_id])

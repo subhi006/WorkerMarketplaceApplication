@@ -10,10 +10,8 @@
         <th>#</th>
         <th>Candidate Name</th>
         <th>Contact Info</th>
-        <th>Experience/Skills</th>
         <th>Application Date</th>
         <th>Status</th>
-        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -26,8 +24,8 @@
           <td><%= application.created_at.strftime("%d %b %Y") %></td>
           <td><%= application.status || "Pending" %></td>
           <td>
-            <%= link_to "Approve", approve_application_path(application), class: "btn btn-success btn-sm", method: :patch %>
-            <%= link_to "Reject", reject_application_path(application), class: "btn btn-danger btn-sm", method: :patch %>
+            <%= link_to "Approve",approve_contractor_applications_path(application), class: "btn btn-success btn-sm", method: :patch %>
+            <%= link_to "Reject", reject_contractor_applications_path(application), class: "btn btn-danger btn-sm", method: :patch %>
           </td>
         </tr>
       <% end %>

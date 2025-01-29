@@ -1,7 +1,39 @@
 <%= render partial: "layouts/worker_header" %>
-
-<h1>List of all Tasks</h1>
-<% @task.each do |per_task|%>
-  <%=link_to per_task.category.name,worker_task_path(per_task)%>
-  <br>
-<%end%>
+<h1>List of all Task</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Task Name</th>
+        <th>Company</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if @task.present? %>
+      <% @task.each_with_index do |per_task, index|%>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td>
+          <%=per_task.category.name%>
+        </td>
+        <td>
+         <%= per_task.company%>
+        </td>
+        <td>
+         <%= per_task.location%>
+        </td>
+        <td>
+            <%= link_to "view",worker_task_path(per_task), class: "btn btn-success btn-sm", method: :patch %>
+        </td>
+      </tr>
+      <%end%>
+    <%else%>
+    <p>There is no task found!</p>
+    <%end%>
+      </tbody>
+</table>
+<% if can? :create, Task %>
+  <p><%= link_to "create new task",new_contractor_task_path%></p>
+<% end %>
+<%= render partial: "layouts/con_footer"%>

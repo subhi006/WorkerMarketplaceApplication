@@ -1,0 +1,28 @@
+<%= render partial: "layouts/worker_header" %>
+  
+<h1>Your Applications</h1>
+
+<% if @applications.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Company</th>
+        <th>Applied On</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @applications.each do |application| %>
+        <tr>
+          <td><%= application.task.category.name %></td>
+          <td><%= application.task.company %></td>
+          <td><%= application.created_at.strftime("%d %b %Y") %></td>
+          <td><%= application.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You haven't applied for any tasks yet.</p>
+<% end %>

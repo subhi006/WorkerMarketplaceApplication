@@ -5,7 +5,7 @@ class Task < ApplicationRecord
   has_many :workers, through: :applications
   has_many :applications, dependent: :destroy
   # accepts_nested_attributes_for :applications, counter_cache: true
-  enum :status, [ :available, :notavailable ]
+  enum :status, [ :unavailable, :available ]
 
   # after_create :send_creation_notification
   # Validations
@@ -18,10 +18,18 @@ class Task < ApplicationRecord
   end
 
   scope :application_count, lambda {
-    left_joins(:applications)
+    where(status: 1).left_joins(:applications)
       .group("tasks.id")
       .order("COUNT(applications.id)")
     }
+
+    def self.search(search)
+              if @task=Task.where(category_id: Category.search_category(search).ids, status: "available")
+                  @task
+              else
+                @task=Task.where(status: "available")
+              end
+    end
 
   # def send_creation_notification
   #   Notification.create(

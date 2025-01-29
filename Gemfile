@@ -58,6 +58,8 @@ group :development, :test do
   # gem "sassc-rails"
   gem "dartsass-rails"
   gem "bootstrap", "~> 5.3.3"
+  gem "image_processing"
+  gem "ruby-vips"
 end
 
 group :development do

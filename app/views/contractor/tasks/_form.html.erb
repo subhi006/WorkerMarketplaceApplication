@@ -3,12 +3,14 @@
     <div class="card shadow-sm p-4">
       <!-- Row 1 -->
       <div class="row g-3">
+           <%if @categories.present?%>
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :category, "Category", class: "form-label" %>
             <%= form.select :category,  @categories.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
           </div>
         </div>
+        <%end%>
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :duration, "Duration", class: "form-label" %>

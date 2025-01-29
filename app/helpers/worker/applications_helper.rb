@@ -1,0 +1,2 @@
+module Worker::ApplicationsHelper
+end
