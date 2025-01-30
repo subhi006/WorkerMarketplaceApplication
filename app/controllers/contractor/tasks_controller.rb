@@ -19,8 +19,7 @@ class Contractor::TasksController < ApplicationController
     @task = Task.new(task_params)
     authorize! :create, @task
     if @task.save
-      # @task=Task.last
-      redirect_to contractor_tasks_path, notice: "Task was successfully created."
+        redirect_to contractor_tasks_path, notice: "Task was successfully created."
     else
       render :new, notice: "retry to create task"
     end
@@ -40,6 +39,7 @@ class Contractor::TasksController < ApplicationController
         @task = Task.find(params[:id])
         @task.status="available"
         if @task.save
+          TaskMailer.with(task: @task).new_task_created_email.deliver_later
           redirect_to contractor_tasks_path
         end
   end

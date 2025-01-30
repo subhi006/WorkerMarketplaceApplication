@@ -182,8 +182,6 @@ worker
 git remote add location  https://github.com/subhi006/worker.git
 git commit -m "initial worker_marketplace_application"
 git push -u location main
-token ====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
-
-===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
-
+token ====
+==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
 git remote set-url origin https://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@github.com/subhi006/WorkerMarketplaceApplication

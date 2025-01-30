@@ -61,6 +61,7 @@ group :development, :test do
   gem "image_processing"
   gem "ruby-vips"
   gem "ransack", github: "activerecord-hackery/ransack"
+  gem "poppler"
 end
 
 group :development do

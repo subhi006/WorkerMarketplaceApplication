@@ -17,10 +17,17 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  # call back
+  after_create :congrats_email
   def full_name
     "#{first_name} #{last_name}"
   end
   def apply(task)  # need a task object for creating application
         self.applied_task << task
+  end
+
+  def congrats_email
+    # mail(to: self.email, subject: "Welcome Message")
+    UserMailer.with(user: self).welcome_email.deliver_now
   end
 end

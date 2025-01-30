@@ -1,49 +1,37 @@
 <% if user_signed_in? %> 
-  <div class="alert alert-success" role="alert">
-    Welcome, <%= current_user.email %>
-  </div>  
+  <!-- Welcome Message -->
+  <div class="alert alert-success text-center" role="alert">
+    Welcome, <%= current_user.email %>!
+  </div> 
 
-  <% if current_user.worker? %>
-  <%= render partial: "layouts/worker_header" %>
-    <!-- Worker Role -->
-    <%= render partial: "profile", locals: { user: current_user } %>
-    <div class="mt-3">
-      <%if can? :read, Task%>
-        <%= link_to "View All Tasks", worker_tasks_path, class: "btn btn-primary" %>
-      <%end%>
-       <%if can? :read, Application%>
-         <%= link_to "View All Applications", worker_applications_path, class: "btn btn-secondary" %>
-       <%end%>
-    </div>
-  <% else %>
-  <%= render partial: "layouts/con_header" %>
-    <!-- Contractor Role -->
-    <%= render partial: "profile", locals: { user: current_user } %>
-    <div class="mt-3">
-      <%if can? :read, Task%>
-         <%= link_to "View All Tasks", contractor_tasks_path, class: "btn btn-primary" %>
-      <%end%>
-    </div>
-    <div class="mt-3">
-      <%if can? :read, Application%>
-        <%= link_to "View All Applications", contractor_applications_path, class: "btn btn-secondary" %>
-      <%end%>
-    </div>
-    <div class="mt-3">
-      <%if can? :create, Task%>
-       <%= link_to "Create New Task", new_contractor_task_path, class: "btn btn-success" %>
-      <%end%>
-    </div>
-  <% end %>
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 1200px;">
+      <div class="card-body text-center">
+        <!-- Worker or Contractor Role Specific Links -->
+        <% if current_user.worker? %>
+          <%= render partial: "worker" %>
+       <% else %>
+          <%= render partial: "contractor" %>
+       <% end %>
 
-  <div class="mt-4">
-    <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+        <!-- Sign Out Button -->
+        <div class="mt-4">
+          <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-block" %>
+        </div>
+      </div>
+    </div>
   </div>
+
 <% else %>
-  <div class="mt-4">
-    <%= button_to "Sign In", new_user_session_path, class: "btn btn-primary" %> 
-  </div>
-  <div class="mt-4">
-    <%= button_to "Sign Up",  new_user_registration_path, class: "btn btn-primary" %> 
+  <!-- Not Signed In: Show Sign In and Sign Up Options -->
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <!-- Larger Card Size (Max-width 800px) -->
+    <div class="card shadow-lg" style="width: 100%; max-width: 800px;">
+      <div class="card-body text-center">
+        <div class="mt-4">
+          <%= button_to "Sign In", new_user_session_path, class: "btn btn-primary btn-block mb-3" %> 
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

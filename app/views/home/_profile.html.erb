@@ -1,5 +1,0 @@
-<% if current_user.profile.present?%>
-  <h1><%=link_to "Profile",   profile_path(current_user)%></h1>
-<%else%>
-  <h1><%=link_to "Create a profile",  new_profile_path%> </h1>
-<%end%>

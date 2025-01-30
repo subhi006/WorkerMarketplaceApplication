@@ -14,6 +14,7 @@ class Ability
       can :create, Profile, worker_id: user.id
       can :read, Profile, contractor_id: user.id
       can :update, Profile, contractor_id: user.id
+      can :add_resume, Profile, worker_id: user.id
     end
     if user.contractor?
       can :create, Task

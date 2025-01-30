@@ -1,0 +1,23 @@
+<%= render partial: "layouts/con_header" %>
+<% if current_user.profile.present?%>
+  <h1><%=link_to "Profile",   profile_path(current_user)%></h1>
+<%else%>
+  <h1><%=link_to "Create a profile",  new_profile_path%> </h1>
+<%end%>
+    <div class="mt-3">
+        <% if can? :read, Task %>
+              <%= link_to "View All Tasks", contractor_tasks_path, class: "btn btn-primary btn-block mb-2" %>
+        <% end %>
+    </div>
+
+   <div class="mt-3">
+        <% if can? :read, Application %>
+              <%= link_to "View All Applications", contractor_applications_path, class: "btn btn-secondary btn-block mb-2" %>
+        <% end %>
+    </div>
+
+    <div class="mt-3">
+        <% if can? :create, Task %>
+            <%= link_to "Create New Task", new_contractor_task_path, class: "btn btn-success btn-block mb-2" %>
+        <% end %>
+    </div>

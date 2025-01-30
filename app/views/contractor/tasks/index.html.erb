@@ -1,5 +1,5 @@
 <%= render partial: "layouts/con_header" %>
-
+<% if @task.present?%>
 <h1>List of all Task</h1>
 <table class="table table-bordered table-striped">
     <thead>
@@ -29,10 +29,14 @@
         </td>
         <td>
             <%= link_to "view", contractor_task_path(per_task), class: "btn btn-success btn-sm", method: :patch %>
-        <% if can? :update, Task %>
-           <% if per_task.unavailable?%>
-             <%= button_to "post",task_post_contractor_task_path(per_task), formmethod: :post, data: { confirm: "Are you sure?" } %>
-           <%end%>
+        </td>
+        <td>
+        <% if can? :update, per_task %>
+          <% if per_task.unavailable? || per_task.status.blank?%>
+            <%= button_to "post",task_post_contractor_task_path(per_task), formmethod: :post, data: { confirm: "Are you sure?" }, class: "btn btn-success btn-sm" %>
+          <% else %>
+            <p><strong>Posted</strong></p>
+          <%end%>
         <%end%>
         </td>
         <td>
@@ -42,6 +46,9 @@
       <%end%>
       </tbody>
 </table>
+<%else%>
+<p>Tere is not task created</p>
+<%end%>
 <% if can? :create, Task %>
   <p><%= link_to "create new task",new_contractor_task_path%></p>
 <% end %>

@@ -12,14 +12,22 @@ class Contractor::ApplicationsController < ApplicationController
     @q = @t.ransack(params[:q])
     @application = @q.result
   end
+
   def approve
-    @application.update(status: "approved")
-    redirect_to contractor_applications_path, notice: "Application approved successfully."
+    @application = Application.find(params[:id])
+    if @application.update(status: "approved")
+      UserMailer.with(user: @application.worker).approved_application_email.deliver_now
+      redirect_to contractor_applications_path, notice: "Application has been approved."
+    end
   end
 
+
   def reject
-    @application.update(status: "rejected")
-    redirect_to  contractor_applications_path, alert: "Application rejected successfully."
+    @application = Application.find(params[:id])
+    if @application.update(status: "rejected")
+      UserMailer.with(user: @application.worker).rejected_application_email.deliver_now
+      redirect_to contractor_applications_path,  notice: "Application has been regected."
+    end
   end
 
   private

@@ -9,7 +9,7 @@
   <p><strong>Company:</strong> <%= task.company %></p>
   <p><strong>Description:</strong> <%= task.description %></p>
   <% if can? :update, task %>
-    <% if task.unavailable?%>
+    <% if task.unavailable? || task.status.blank?%>
         <%= button_to "post",task_post_contractor_task_path(task), formmethod: :post, data: { confirm: "Are you sure?" } %>
      <% else %>
      <p><strong>....Task is posted....</strong></p>

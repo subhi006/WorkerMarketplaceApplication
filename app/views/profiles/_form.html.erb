@@ -37,7 +37,7 @@
       <div class="row g-3">
         <div class="col-md-6">
           <div class="mb-3">
-            <%= form.label :avatar, "Avatar", class: "form-label" %>
+            <%= form.label :avatar, "Profile picture", class: "form-label" %>
             <%= form.file_field :avatar, class: "form-control", rows: 3, placeholder: "Enter photo URL" %>
           </div>
         </div>
@@ -48,7 +48,22 @@
           </div>
         </div>
       </div>
-
+      <div class="row g-3">
+        <% if can? :add_resume, Profile%>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :resume, "Resume", class: "form-label" %>
+            <%= form.file_field :resume, multiple: true, direct_upload: true, class: "form-control", rows: 3, placeholder: "Enter photo URL" %>
+          </div>
+        </div>
+        <%end%>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :skill, "Skills", class: "form-label" %>
+            <%= form.text_field :skill, class: "form-control", placeholder: "Enter experience (e.g., c++, python etc)" %>
+          </div>
+        </div>
+      </div>
       <!-- Submit Button -->
       <div class="row g-3">
         <div class="col-12 text-end">

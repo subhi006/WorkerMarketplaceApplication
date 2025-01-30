@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   # Associations
-  belongs_to :category
-  belongs_to :contractor, class_name: "User"
+  belongs_to :category, dependent: :destroy
+  belongs_to :contractor, class_name: "User", dependent: :destroy
   has_many :workers, through: :applications
   has_many :applications, dependent: :destroy
   # accepts_nested_attributes_for :applications, counter_cache: true
@@ -30,7 +30,6 @@ class Task < ApplicationRecord
                 @task=Task.where(status: "available")
               end
     end
-
   # def send_creation_notification
   #   Notification.create(
   #     user_id: contractor.id,

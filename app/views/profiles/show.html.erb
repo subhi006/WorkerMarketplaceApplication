@@ -1,11 +1,24 @@
 <h1>Profile</h1>
-<p><%= @profile.avatar %></p>
+<% if @profile.avatar? %>
+  <%= image_tag @profile.avatar, size: "100x100" %>
+<% else %>
+<%= false[:alert] = "upload profile photo"%>
+<% end %>
 <p><strong>User name:</strong> <%= @profile.name %></p>
 <p><strong>Address:</strong> <%= @profile.address %></p> 
 <p><strong>Bio:</strong> <%= @profile.bio %></p> 
+<p><strong>Bio:</strong> <%= @profile.skill %></p> 
 <p>Name:<%=@profile.user.full_name%></p>
 <p>Phone Number:<%=@profile.user.phone_number%></p>
 <p>Role :<%=@profile.user.role%></p>
+<p>Resume :
+     <%= link_to rails_blob_path(@profile.resume, disposition: "attachment") do %>
+      <%= image_tag @profile.resume, alt: "view" %>
+     <% end %>
+</p>
+<%# <%=text = Pdftotext.text('path-to.pdf')%> %>
+
+<%# <%=document = MuPDF::Document.new( @profile.resume )%> %>
 
 <% if current_user == @profile.user %>
  <p><%=link_to "Edit Profile", edit_profile_path(current_user)%> </p>
