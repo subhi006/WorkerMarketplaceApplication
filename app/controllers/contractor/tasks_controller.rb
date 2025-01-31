@@ -45,8 +45,9 @@ class Contractor::TasksController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @task
-    redirect_to contractor_tasks_path, notice: "Task was successfully destroyed"
+    if @task.destroy!
+      redirect_to contractor_tasks_path, notice: "Task was successfully destroyed"
+    end
   end
 
   private

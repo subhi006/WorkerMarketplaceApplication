@@ -1,51 +1,67 @@
-<h2>Sign up</h2>
+<h2 class="text-primary text-center my-4">Sign Up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="card shadow-lg p-4 mx-auto" style="max-width: 600px;">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation" }) do |f| %>
+    
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <!-- Email Field -->
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label fw-bold" %>
+      <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <!-- Password Fields -->
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label fw-bold" %> 
+      <% if @minimum_password_length %>
+        <small class="text-muted">(<%= @minimum_password_length %> characters minimum)</small>
+      <% end %>
+      <%= f.password_field :password, class: "form-control", autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :password_confirmation, class: "form-label fw-bold" %>
+      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+    </div>
 
-   <div class="field">
-    <%= f.label :first_name%><br />
-    <%= f.text_field :first_name %>
-  </div>
+    <!-- Additional Fields -->
+    <div class="mb-3">
+      <%= f.label :first_name, class: "form-label fw-bold" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
 
- <div class="field">
-    <%= f.label :last_name%><br />
-    <%= f.text_field :last_name %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :last_name, class: "form-label fw-bold" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
 
-   <div class="field">
-    <%= f.label :phone_number%><br />
-    <%= f.text_field :phone_number %>
-  </div>
-  <div>
-  <p>Select Profile Type</p>
-  <%= f.radio_button :role, "worker" %>
-  <%= f.label :role_worker, "worker" %>
-  <%= f.radio_button :role, "contractor" %>
-  <%= f.label :role_contractor, "contractor" %>
-  </div>
-  <br>
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="mb-3">
+      <%= f.label :phone_number, class: "form-label fw-bold" %>
+      <%= f.text_field :phone_number, class: "form-control" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <!-- Role Selection -->
+    <div class="mb-3">
+      <p class="fw-bold">Select Profile Type:</p>
+      <div class="form-check">
+        <%= f.radio_button :role, "worker", class: "form-check-input", id: "role_worker" %>
+        <%= f.label :role_worker, "Worker", class: "form-check-label" %>
+      </div>
+      <div class="form-check">
+        <%= f.radio_button :role, "contractor", class: "form-check-input", id: "role_contractor" %>
+        <%= f.label :role_contractor, "Contractor", class: "form-check-label" %>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-grid">
+      <%= f.submit "Sign Up", class: "btn btn-primary fw-semibold" %>
+    </div>
+  <% end %>
+
+  <!-- Additional Links -->
+  <div class="text-center mt-3">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

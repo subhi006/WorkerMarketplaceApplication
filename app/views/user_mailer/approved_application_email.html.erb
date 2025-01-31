@@ -1,10 +1,17 @@
 
--<h1>Welcome to my company, <%= @user.first_name %></h1>
-<p>
-  You have selected for this role ,
-  your username is: <%= @user.last_name %>.<br>
-</p>
-<p>
-  <%# To login to the site, just follow this link: <%= link_to 'login`, login_url '%>. %>
-</p>
-<p>Thanks for joining and have a great day!</p>
+Hi <%= @user.full_name %>,
+
+Welcome!.
+
+You have been selected for the following role <%= @use.role %>.
+
+To get started, please log in to your account by clicking the link below:
+
+<%= link_to 'Login Here', new_user_session_url %>
+
+Thank you for joining us, and we look forward to your success with us.
+
+If you have any questions or need assistance, feel free to reach out.
+
+Best regards,
+Rojgar Team

@@ -1,9 +1,9 @@
-<h1>Welcome to example.com, <%= @user.first_name %></h1>
+<h1>Welcome to rojgar, <%= @user.first_name %></h1>
 <p>
-  You have successfully signed up to example.com,
-  your username is: <%= @user.last_name %>.<br>
+  You have successfully signed up to rojgar, 
+  your username is: <%= @user.full_name %>.<br>
 </p>
 <p>
-  <%# To login to the site, just follow this link: <%= link_to 'login`, login_url '%>. %>
+  To login to the site, just follow this link: <%= link_to 'Login', new_user_session_url %>.
 </p>
 <p>Thanks for joining and have a great day!</p>

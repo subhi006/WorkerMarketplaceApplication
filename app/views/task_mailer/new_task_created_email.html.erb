@@ -1,6 +1,11 @@
-<p>Hey  user ..... </p>
-<p>new task was creted</p>
-<h1>Task details</h1>
-<p><%=@task.category.name%></p>
-<p>@task.location</p>
-<p>@task.company</p>
+Dear,
+
+<p>We are excited to inform you that a new task has been successfully created.</p>
+
+<p>Here are the task details:</p>
+
+<p>Task Category: <%= @task.category.name %></p>
+<p>Location: <%= @task.location %></p>
+<p>Company: <%= @task.company %></p>
+Best regards,
+Team

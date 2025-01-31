@@ -1,26 +1,51 @@
-<h1>Profile</h1>
-<% if @profile.avatar? %>
-  <%= image_tag @profile.avatar, size: "100x100" %>
-<% else %>
-<%= false[:alert] = "upload profile photo"%>
-<% end %>
-<p><strong>User name:</strong> <%= @profile.name %></p>
-<p><strong>Address:</strong> <%= @profile.address %></p> 
-<p><strong>Bio:</strong> <%= @profile.bio %></p> 
-<p><strong>Bio:</strong> <%= @profile.skill %></p> 
-<p>Name:<%=@profile.user.full_name%></p>
-<p>Phone Number:<%=@profile.user.phone_number%></p>
-<p>Role :<%=@profile.user.role%></p>
-<p>Resume :
-     <%= link_to rails_blob_path(@profile.resume, disposition: "attachment") do %>
-      <%= image_tag @profile.resume, alt: "view" %>
-     <% end %>
-</p>
-<%# <%=text = Pdftotext.text('path-to.pdf')%> %>
+<h1 class="text-center">Profile</h1>
 
-<%# <%=document = MuPDF::Document.new( @profile.resume )%> %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <!-- Profile Picture -->
+      <div class="text-center mb-4">
+        <% if @profile.avatar? %>
+          <%= image_tag @profile.avatar, size: "150x150", class: "rounded-circle" %>
+        <% else %>
+          <div class="alert alert-warning" role="alert">
+            Please upload a profile photo.
+          </div>
+        <% end %>
+      </div>
 
-<% if current_user == @profile.user %>
- <p><%=link_to "Edit Profile", edit_profile_path(current_user)%> </p>
-<%end%>
-<p><%=link_to "Home Page", root_path%> </p>
+      <!-- Profile Information -->
+      <div class="card shadow-sm p-4 mb-4">
+        <h4>User Information</h4>
+        <p><strong>User Name:</strong> <%= @profile.name %></p>
+        <p><strong>Address:</strong> <%= @profile.address %></p>
+        <p><strong>Bio:</strong> <%= @profile.bio %></p>
+        <p><strong>Skills:</strong> <%= @profile.skill %></p>
+        <p><strong>Full Name:</strong> <%= @profile.user.full_name %></p>
+        <p><strong>Phone Number:</strong> <%= @profile.user.phone_number %></p>
+        <p><strong>Role:</strong> <%= @profile.user.role %></p>
+
+        <!-- Resume -->
+        <p><strong>Resume:</strong>
+          <% if @profile.resume.attached? %>
+            <%= link_to "Download Resume", rails_blob_path(@profile.resume, disposition: "attachment"), class: "btn btn-link" %>
+          <% else %>
+            <span>No resume uploaded</span>
+          <% end %>
+        </p>
+      </div>
+
+      <!-- Edit Profile link for the current user -->
+      <% if current_user == @profile.user %>
+        <div class="text-center mb-4">
+          <%= link_to "Edit Profile", edit_profile_path(current_user), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+
+      <!-- Home Page link -->
+      <div class="text-center">
+        <%= link_to "Home Page", root_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,55 +1,68 @@
 <%= render partial: "layouts/con_header" %>
-<% if @task.present?%>
-<h1>List of all Task</h1>
-<table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Task Name</th>
-        <th>Company</th>
-        <th>Location</th>
-         <th>Number of Applications</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @task.each_with_index do |per_task, index|%>
-      <tr>
-        <td><%= index + 1 %></td>
-        <td>
-          <%=per_task.category.name%>
-        </td>
-        <td>
-         <%= per_task.company%>
-        </td>
-        <td>
-         <%= per_task.location%>
-        </td>
-        <td>
-          <%= per_task.applications.count || "0" %>
-        </td>
-        <td>
-            <%= link_to "view", contractor_task_path(per_task), class: "btn btn-success btn-sm", method: :patch %>
-        </td>
-        <td>
-        <% if can? :update, per_task %>
-          <% if per_task.unavailable? || per_task.status.blank?%>
-            <%= button_to "post",task_post_contractor_task_path(per_task), formmethod: :post, data: { confirm: "Are you sure?" }, class: "btn btn-success btn-sm" %>
-          <% else %>
-            <p><strong>Posted</strong></p>
-          <%end%>
-        <%end%>
-        </td>
-        <td>
-            <%= link_to "Applicant",  contractor_application_path(per_task), class: "btn btn-secondary btn-sm" %>
-        </td>
-      </tr>
-      <%end%>
-      </tbody>
-</table>
-<%else%>
-<p>Tere is not task created</p>
-<%end%>
-<% if can? :create, Task %>
-  <p><%= link_to "create new task",new_contractor_task_path%></p>
+
+<% if @task.present? %>
+<br>
+  <div class="row align-items-center">
+    <div class="col-md-8">
+      <h3>List of All Tasks</h3>
+    </div>
+
+    <div class="col-md-4 text-end">
+      <% if can? :create, Task %>
+        <%= link_to "Create New Task", new_contractor_task_path, class: "btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
+  </div>
+<br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <% @task.each_with_index do |per_task, index| %>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-primary text-white text-center">
+                <h5><%= per_task.category.name %></h5>
+              </div>
+              <div class="card-body">
+                <p><strong>Company:</strong> <%= per_task.company %></p>
+                <p><strong>Location:</strong> <%= per_task.location %></p>
+                <p><strong>Applications:</strong> <%= per_task.applications.count || "0" %></p>
+
+                <div class="d-flex justify-content-around mt-3">
+                  <%= link_to "View", contractor_task_path(per_task), class: "btn btn-success btn-sm" %>
+
+                  <% if can? :update, per_task %>
+                    <% if per_task.unavailable? || per_task.status.blank? %>
+                      <%= button_to "Post", task_post_contractor_task_path(per_task), formmethod: :post, data: { confirm: "Are you sure?" }, class: "btn btn-primary btn-sm" %>
+                    <% else %>
+                      <span class="badge bg-success">Posted</span>
+                    <% end %>
+                  <% end %>
+
+                  <%= link_to "Applicants", contractor_application_path(per_task), class: "btn btn-secondary btn-sm" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+<br>
+  <div class="row align-items-center">
+    <div class="col-md-8">
+      <h3>There are no tasks created.</h3>
+    </div>
+
+    <div class="col-md-4 text-end">
+      <% if can? :create, Task %>
+        <%= link_to "Create New Task", new_contractor_task_path, class: "btn btn-primary btn-lg" %>
+      <% end %>
+    </div>
+  </div>
+<br>
 <% end %>
-<%= render partial: "layouts/con_footer"%>
+
+<%= render partial: "layouts/con_footer" %>

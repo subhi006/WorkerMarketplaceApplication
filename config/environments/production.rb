@@ -89,16 +89,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # email cofigration
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com", # Can use any other domain as well according to your convenience
-    user_name: "samishra@bestpeers.in",
-    password: "wpax tewa yrrp hxyd",
-    authentication: "plain",
-    enable_starttls_auto: true
-  }
+
 
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 

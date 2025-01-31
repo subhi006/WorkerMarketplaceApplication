@@ -1,16 +1,26 @@
 <div class="container mt-4">
   <%= form_with model: [:contractor, @task], local: true, class: 'needs-validation' do |form| %>
+     <% if @task.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
     <div class="card shadow-sm p-4">
-      <!-- Row 1 -->
+      <!-- Task Category and Duration -->
       <div class="row g-3">
-           <%if @categories.present?%>
-        <div class="col-md-6">
-          <div class="mb-3">
-            <%= form.label :category, "Category", class: "form-label" %>
-            <%= form.select :category,  @categories.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
+        <% if @categories.present? %>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= form.label :category, "Category", class: "form-label" %>
+              <%= form.select :category, @categories.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select" %>
+            </div>
           </div>
-        </div>
-        <%end%>
+        <% end %>
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :duration, "Duration", class: "form-label" %>
@@ -19,7 +29,7 @@
         </div>
       </div>
 
-      <!-- Row 2 -->
+      <!-- Task Location and Company -->
       <div class="row g-3">
         <div class="col-md-6">
           <div class="mb-3">
@@ -35,8 +45,7 @@
         </div>
       </div>
 
-      <!-- Row 3 -->
-        <!-- Shift Timing and Hours -->
+      <!-- Shift Timing and Hours -->
       <div class="row g-3">
         <div class="col-md-6">
           <div class="mb-3">
@@ -55,25 +64,28 @@
           </div>
         </div>
       </div>
+
+      <!-- Experience and Job Mode -->
       <div class="row g-3">
-         <div class="col-md-6">
+        <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :experience, "Experience", class: "form-label" %>
             <%= form.number_field :experience, class: "form-control", placeholder: "Enter experience (e.g., 1 year)" %>
           </div>
         </div>
-      <!-- Job Mode -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <%= form.label :job_mode, "Job Mode", class: "form-label" %>
-          <%= form.select :job_mode, 
-            options_for_select([['Hybrid', 'Hybrid'], ['Remote', 'Remote'], ['On-Site', 'On-Site']], selected: nil), 
-            { prompt: 'Select job mode' }, 
-            class: "form-select" %>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :job_mode, "Job Mode", class: "form-label" %>
+            <%= form.select :job_mode, 
+              options_for_select([['Hybrid', 'Hybrid'], ['Remote', 'Remote'], ['On-Site', 'On-Site']], selected: nil), 
+              { prompt: 'Select job mode' }, 
+              class: "form-select" %>
+          </div>
         </div>
       </div>
-     </div>
 
+      <!-- Description and Salary -->
       <div class="row g-3">
         <div class="col-md-6">
           <div class="mb-3">
@@ -88,14 +100,13 @@
           </div>
         </div>
       </div>
+
       <!-- Submit Button -->
       <div class="row g-3">
         <div class="col-12 text-end">
-          <%= form.submit "Save", class: "btn btn-primary" %>
+          <%= form.submit "Save Task", class: "btn btn-primary w-100" %>
         </div>
       </div>
     </div>
-     <%# <%= button_to "post",task_post_contractor_task_path(@task), formmethod: :post, data: { confirm: "Are you sure?" } %> %>
-
   <% end %>
 </div>

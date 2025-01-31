@@ -12,8 +12,8 @@ class Ability
       can :create, Application, worker_id: user.id
       can :read, Application, worker_id: user.id
       can :create, Profile, worker_id: user.id
-      can :read, Profile, contractor_id: user.id
-      can :update, Profile, contractor_id: user.id
+      can :read, Profile, worker_id: user.id
+      can :update, Profile, worker_id: user.id
       can :add_resume, Profile, worker_id: user.id
     end
     if user.contractor?

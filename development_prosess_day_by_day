@@ -64,6 +64,10 @@ Shoulda Matchers-gem for rspec
 
 
 
+Task.create!( duration: "2", salary: 2342134, location: "bhopal", company: "tcs", description: "", sift_hours:2, sift: "day shift", job_mode: "remote", category_id: 38, contractor_id: 12, applications_count: 0, status: 1, experience: 1)
+
+
+
 
 
  devise_for :agents
@@ -184,4 +188,4 @@ git commit -m "initial worker_marketplace_application"
 git push -u location main
 token ====
 ==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
-git remote set-url origin https://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@github.com/subhi006/WorkerMarketplaceApplication
+git remote set-url origin https://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@github.com/subhi006/WorkerMarketplaceApplication
