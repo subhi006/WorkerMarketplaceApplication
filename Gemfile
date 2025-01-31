@@ -62,6 +62,8 @@ group :development, :test do
   gem "ruby-vips"
   gem "ransack", github: "activerecord-hackery/ransack"
   gem "poppler"
+  gem "twilio-ruby"
+  gem "phonelib"
 end
 
 group :development do
@@ -74,3 +76,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# gem "sidekiq"

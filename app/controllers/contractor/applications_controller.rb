@@ -17,6 +17,7 @@ class Contractor::ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     if @application.update(status: "approved")
       UserMailer.with(user: @application.worker).approved_application_email.deliver_now
+      TwilioClient.new.send_text(@application.worker, "hello user..., how are you?")
       redirect_to contractor_applications_path, notice: "Application has been approved."
     end
   end

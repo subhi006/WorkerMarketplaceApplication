@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :phone_number, presence: true, phone: true
   # call back
   before_save :capitalize_name
   after_create :congrats_email

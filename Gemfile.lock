@@ -147,6 +147,12 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
+    faraday (2.12.2)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-net_http (3.4.0)
+      net-http (>= 0.5.0)
     ffi (1.17.1-x64-mingw-ucrt)
     ffi (1.17.1-x86_64-linux-gnu)
     fiddle (1.1.6)
@@ -187,6 +193,8 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.9.1)
+    jwt (2.10.1)
+      base64
     kamal (2.4.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -215,6 +223,8 @@ GEM
     minitest (5.25.4)
     msgpack (1.7.5)
     native-package-installer (1.1.9)
+    net-http (0.6.0)
+      uri
     net-imap (0.5.5)
       date
       net-protocol
@@ -242,6 +252,7 @@ GEM
       racc
     pg (1.5.9)
     pg (1.5.9-x64-mingw-ucrt)
+    phonelib (0.10.3)
     pkg-config (1.5.9)
     popper_js (2.11.8)
     poppler (4.2.7)
@@ -411,6 +422,12 @@ GEM
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    twilio-ruby (7.4.3)
+      benchmark
+      faraday (>= 0.9, < 3.0)
+      jwt (>= 1.5, < 3.0)
+      nokogiri (>= 1.6, < 2.0)
+      ostruct
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2025.1)
@@ -455,6 +472,7 @@ DEPENDENCIES
   jbuilder
   kamal
   pg (~> 1.1)
+  phonelib
   poppler
   propshaft
   puma (>= 5.0)
@@ -471,6 +489,7 @@ DEPENDENCIES
   stimulus-rails
   thruster
   turbo-rails
+  twilio-ruby
   tzinfo-data
   web-console
 

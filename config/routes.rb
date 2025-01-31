@@ -37,6 +37,9 @@ Rails.application.routes.draw do
     resources :applications, only: [ :index, :show ]
   end
   resources :profiles
+
+  # get ‘/twilio/sms’
+  # post ‘/twilio/sms’
   # Defines the root path route ("/")
   # root "posts#index"
 end
