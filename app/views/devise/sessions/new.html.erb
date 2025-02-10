@@ -1,0 +1,49 @@
+<h2 class="text-primary text-center my-4">Log In</h2>
+
+<div class="card shadow-lg p-4 mx-auto" style="max-width: 500px;">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "needs-validation" }) do |f| %>
+
+    <!-- Email Field -->
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label fw-bold" %>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+        <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+      </div>
+    </div>
+
+    <!-- Password Field -->
+    <div class="mb-3">
+      <%= f.label :password, class: "form-label fw-bold" %>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+        <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
+      </div>
+    </div>
+
+    <!-- Remember Me -->
+    <% if devise_mapping.rememberable? %>
+      <div class="form-check mb-3">
+        <%= f.check_box :remember_me, class: "form-check-input", id: "remember_me" %>
+        <%= f.label :remember_me, class: "form-check-label", for: "remember_me" %>
+      </div>
+    <% end %>
+
+    <!-- Submit Button -->
+    <div class="d-grid">
+      <%= f.submit "Log in", class: "btn btn-primary fw-semibold" %>
+    </div>
+
+  <% end %>
+
+  <!-- Additional Links -->
+  <div class="text-center mt-3">
+    <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-decoration-none" %><br>
+    <%= link_to "Sign up", new_registration_path(resource_name), class: "text-decoration-none" %>
+  </div>
+
+  <!-- Logout Link -->
+  <div class="text-center mt-3">
+    <%= link_to "Log Out", destroy_user_session_path, class: "btn btn-outline-danger btn-sm", 'data-turbo-method': :delete %>
+  </div>
+</div>

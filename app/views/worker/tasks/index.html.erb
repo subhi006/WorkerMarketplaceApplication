@@ -1,0 +1,107 @@
+ <div class="d-flex justify-content-end">
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      Filter
+    </button>
+    
+      <div class="dropdown-menu dropdown-menu-end p-4 shadow" style="width: 300px;"> 
+       <%= search_form_for [:worker, @q], remote: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :location_cont, 'Location' %>
+          <div class="input-group">
+            <%= f.text_field :location_cont, class: "form-control", placeholder: "Enter location" %>
+            <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :company_cont, 'Company' %>
+          <div class="input-group">
+            <%= f.text_field :company_cont, class: "form-control", placeholder: "Enter company" %>
+            <span class="input-group-text"><i class="bi bi-building"></i></span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :category_id_eq, "Category" %>
+          <%= f.collection_select :category_id_eq, Category.all, :id, :name, { include_blank: "Select category" }, class: "form-select" %>
+        </div>
+        <div class="mb-3">
+         <%= f.label :experience_eq, "Experience (in months)" %> 
+         <%= f.text_field :experience_eq, class: "form-control", placeholder: "Enter number of months" %>
+       </div>
+
+        <div class="mb-3">
+          <%= f.submit "Search", class: "btn btn-primary w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 
+
+
+</div>
+<p id="notice"><%= notice %></p>
+<%# task view %>
+<h1>List of all Task</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Task Name</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>view</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if @tasks.present? %>
+      <% @tasks.each_with_index do |task, index|%>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td>
+          <%=category(task)%>
+        </td>
+        <td>
+         <%= task.company%>
+        </td>
+        <td>
+         <%= task.location%>
+        </td>
+        <td>
+         <%= formate_date(task.updated_at)%>
+        </td>
+        <td>
+         <%= formate_time(task.updated_at)%>
+        </td>
+        <td>
+            <%= link_to "view",worker_task_path(task), class: "btn btn-success btn-sm", method: :patch %>
+        </td>
+        <th>
+        <%if task.current_status.eql?("Available")%>
+          <% if can? :create, Application %>
+            <% if task.id.in?current_user.applications.pluck(:task_id)%>
+              <p><strong>Applied successfully</strong></p>
+            <%else%> 
+              <%= form_with url: worker_task_applications_path(task), method: :post do %>
+                 <%= submit_tag 'Apply' %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <%else%>
+          <p class="text-info"><strong><%= task.current_status %></strong></p>
+        <%end%>
+        </th>
+      </tr>
+      <%end%>
+    <%else%>
+    <p>There is no task found!</p>
+    <%end%>
+      </tbody>
+</table>
+<% if can? :create, Task %>
+  <p><%= link_to "create new task",new_contractor_task_path%></p>
+<% end %>

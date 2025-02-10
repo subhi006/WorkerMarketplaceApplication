@@ -1,0 +1,61 @@
+<p><strong>Applications for</strong> <%= category(@task)%></p>
+<p><strong>Company:</strong> <%= @task.company %></p> 
+<p><strong>Location:</strong> <%= @task.location %></p> 
+<%# <%debugger%>
+<div>
+<%= search_form_for [:contractor, @q], remote: true do |f| %>
+          <div class="d-flex align-items-center">
+            <div class="me-2">
+              <%= f.label :experience_cont, 'Experience' %>
+              <%= f.text_field :experience_cont, class: "form-control" %>
+            </div>
+          </div>
+          <div>
+              <%= f.submit "Search", class: "btn btn-primary" %>
+          </div>
+<% end %>
+</div>
+
+
+<% if @application.present? %>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Candidate Name</th>
+        <th>Experience</th>
+        <th>Contact Info</th>
+        <th>Application Date</th>
+        <th>Status</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @application.each_with_index do |application, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= category(application.task)%></td>
+          <td><%= name(application) %></td>
+          <td><%= experience(application)%></td>
+          <td><%= number(application) %></td>
+          <%# <td><%= application.worker.skills || "Not Provided" %></td> %>
+          <td><%= formate_date(application.created_at)%></td>
+          <td><%= application.status || "Pending" %></td>
+          <td>
+            <% if can? :approve, application%>
+            <%= link_to "Approve",approve_contractor_application_path(application), class: "btn btn-success btn-sm", method: :patch %>
+            <%end%>
+            <% if can? :reject,application%>
+            <%= link_to "Reject", reject_contractor_application_path(application), class: "btn btn-danger btn-sm", method: :patch %>
+            <%end%>
+          </td>
+          <td>
+             <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No applications found for this task.</p>
+<% end %>

@@ -1,0 +1,114 @@
+<div class="container mt-4">
+  <%= form_with model: [:contractor, @task], local: true, class: 'needs-validation' do |form| %>
+    <% if @task.errors.any? %>
+    <div class="alert alert-danger">
+    <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul>
+        <% @task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+    <div class="card shadow-sm p-4">
+      <!-- Task Category and Duration -->
+      <div class="row g-3">
+        <% if @categories.present? %>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= form.label :category, "Category", class: "form-label" %><span style="color: red;">*</span>
+              <%= form.select :category, @categories.map { |i| [i.name, i.id] }, { prompt: 'Select a category' }, class: "form-select", required: true %>
+            </div>
+          </div>
+        <% end %>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :duration, "Duration", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.text_field :duration, class: "form-control", placeholder: "Enter duration (e.g., 3 months)" , required: true%>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task Location and Company -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :location, "Location", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.text_field :location, class: "form-control", placeholder: "Enter location" , required: true%>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :company, "Company", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.text_field :company, class: "form-control", placeholder: "Enter company name" , required: true%>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :sift, "Shift Timing", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.select :sift, 
+              options_for_select([['Day Shift', 'Day'], ['Night Shift', 'Night']], selected: nil), 
+              { prompt: 'Select shift timing' }, 
+              class: "form-select" %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :sift_hours, "Shift Duration (Hours)", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.number_field :sift_hours, class: "form-control", placeholder: "Enter shift duration (e.g., 7 hours)", required: true %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience and Job Mode -->
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :experience, "Experience(months)", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.number_field :experience, class: "form-control", placeholder: "Enter experience (e.g., 6 months)" , required: true%>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :job_mode, "Job Mode", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.select :job_mode, 
+              options_for_select([['Hybrid', 'Hybrid'], ['Remote', 'Remote'], ['On-Site', 'On-Site']], selected: nil), 
+              { prompt: 'Select job mode' }, 
+              class: "form-select" , required: true%>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :description, "Description", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.text_area :description, class: "form-control", rows: 3, placeholder: "Enter job description" , required: true%>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :salary, "Salary", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.number_field :salary, class: "form-control", placeholder: "Enter salary in INR", required: true %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :number_of_position, "Numner of Positions", class: "form-label" %><span style="color: red;">*</span>
+            <%= form.number_field :number_of_position, class: "form-control", placeholder: "Enter numner of position", required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 text-end">
+          <%= form.submit "Save Task", class: "btn btn-primary w-100" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

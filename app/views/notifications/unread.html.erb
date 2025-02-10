@@ -1,0 +1,29 @@
+<h1 class="text-center mb-4">Notifications</h1>
+
+<% if @notifications.any? %>
+  <table class="table table-bordered table-striped">
+    <thead class="table-primary">
+      <tr>
+        <th>Message</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @notifications.each do |notification| %>
+        <tr>
+          <td><%= notification.message %></td>
+          <td><%= notification.created_at.strftime("%d %b %Y") %></td>
+          <td><%= notification.created_at.strftime("%H: %M") %></td>
+          <%# <td><%= link_to "View Notification" , notification_path(notification), class: "btn btn-success btn-sm" %>  %>
+          <%# <td><%= button_to "View Notification", mark_as_read_notification_path(notification), formmethod: :post, class: "btn btn-outline-success w-100 py-2 shadow-sm" , data: { confirm: "Notification was read" } %> %>
+           <td><%= link_to "View Notification",mark_as_read_notification_path(notification), class: "btn btn-success btn-sm", method: :patch %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center">No New Update.</p>
+  <p class="text-center"><%=link_to "View Old Notification", notifications_path%></p>
+<% end %>

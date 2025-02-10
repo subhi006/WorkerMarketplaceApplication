@@ -1,0 +1,30 @@
+<h1 class="text-center mb-4">Task</h1>
+<div class="card p-3 mb-3 shadow-sm">
+  <p class="fs-5 text-info"><strong><%= task.current_status %></strong></p>
+  <p><strong>Task Category:</strong> <%= category(task) %></p>
+  <p><strong>Duration:</strong> <%= task.duration %></p>
+  <p><strong>Location:</strong> <%= task.location %></p>
+  <p ><strong>Number of Positions:</strong> <%= task.number_of_position %></p>
+  <p><strong>Sift Timing:</strong> <%= task.sift %></p>
+  <p><strong>Sift Hours:</strong> <%= task.sift_hours %></p>
+  <p><strong>Job Mode:</strong> <%= task.job_mode %></p>
+  <p><strong>Company:</strong> <%= task.company %></p>
+  <p><strong>Description:</strong> <%= task.description %></p>
+  <p><strong>Experience(months):</strong> <%= task.experience  %></p>
+  <p><strong>Time:</strong> <%= formate_date_time(task.updated_at )%></p>
+
+  <%if availability(task)%>
+    <% if can? :create, Application %>
+     <% if task_applied(task)%>
+       <p class="text-center mb-4"><strong>Applied successfully</strong></p>
+     <%else%> 
+     <div class="text-center mb-4">
+      <%= form_with url: worker_task_applications_path(task), method: :post do %>
+        <%= submit_tag 'Apply for this Task' %>
+     <% end %>
+     </div>
+    <% end %>
+  <% end %>
+ <% end %>
+ 
+</div>

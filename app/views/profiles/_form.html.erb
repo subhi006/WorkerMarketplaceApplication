@@ -1,0 +1,79 @@
+<div class="container mt-4">
+  <%= form_with model: profile, local: true, class: 'needs-validation' do |form| %>
+   <% if profile.errors.any? %>
+    <div class="alert alert-danger">
+    <h2><%= pluralize(profile.errors.count, "error") %> prohibited thisprofile from being saved:</h2>
+      <ul>
+        <% profile.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="card shadow-sm p-4">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :name, "User Name", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.text_field :name, class: "form-control", placeholder: "Enter user name (e.g., John Doe)", required: true %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :bio, "Bio", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.text_field :bio, class: "form-control", placeholder: "Enter bio (e.g., Developer)", required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :contact_info, "Contact Info", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.text_field :contact_info, class: "form-control", placeholder: "Enter contact info", required: true %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :address, "Address", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.text_field :address, class: "form-control", placeholder: "Enter address", required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :avatar, "Profile picture", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.file_field :avatar, class: "form-control", rows: 3, placeholder: "Enter photo URL", required: true, accept: "image/*" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :experience, "Experience(months)", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.number_field :experience, class: "form-control", placeholder: "Enter experience (e.g., 6 months)", required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <% if can? :add_resume, Profile%>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :resume, "Resume", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.file_field :resume, multiple: true, class: "form-control", rows: 3, placeholder: "Enter photo URL", required: true %>
+          </div>
+        </div>
+        <%end%>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :skill, "Skills", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.text_field :skill, class: "form-control", placeholder: "Enter skills (e.g., c++, python etc)", required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 text-end">
+          <%= form.submit "Save", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

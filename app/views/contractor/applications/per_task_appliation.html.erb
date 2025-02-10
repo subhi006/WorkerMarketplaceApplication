@@ -1,0 +1,64 @@
+<%# <%debugger%>
+ <h3>Applications</h3>
+ <div class="d-flex justify-content-end">
+  <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      Filter
+    </button>    
+    <div class="dropdown-menu dropdown-menu-end p-4 shadow" style="width: 300px;">
+    <%= search_form_for [:contractor, @q], remote: true do |f| %>
+      <div class="d-flex align-items-center">
+        <div class="me-2">
+           <%= f.label :experience_cont, 'Experience' %>
+           <%= f.text_field :experience_cont, class: "form-control" %>
+         </div>
+       </div>
+       <div>
+         <%= f.submit "Search", class: "btn btn-primary" %>
+       </div>
+     <% end %>
+     </div>
+  </div>
+</div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Task Name</th>
+        <th>Candidate Name</th>
+        <th>Experience(months)</th>
+        <th>Contact Info</th>
+        <th>Application Date</th>
+        <th>Status</th>
+        <th>view</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @applications.each_with_index do |application, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= category(application.task)%></td>
+          <td><%= name(application) %></td>
+          <td><%= experience(application)%></td>
+          <td><%= number(application) %></td>
+          <%# <td><%= application.worker.skills || "Not Provided" %></td>
+          <td><%= formate_date(application.created_at) %></td>
+           <td>
+            <%if application.applied?%>
+               <%= link_to "Approve",approve_contractor_application_path(application), class: "btn btn-success btn-sm", method: :patch %>
+               <%= link_to "Reject", reject_contractor_application_path(application), class: "btn btn-danger btn-sm", method: :patch %>
+            <%else%>
+               <%= application.status%>
+            <%end%>
+            </td>
+            <td>
+                <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
+            <td>
+          </td>
+        </tr>
+        <%end%>
+    </tbody>
+  </table>
+
+
+

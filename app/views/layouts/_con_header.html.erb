@@ -1,0 +1,33 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #67B7D1;">
+    <div class="container-fluid">
+      <!-- Branding -->
+      <%# <a class="navbar-brand" href="#">
+        <img src="logo.png" alt="Contractor" style="width: 40px; height: 40px;" class="me-2"> 
+      </a> %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to "Home", root_path, class: "nav-link text-white", aria: { current: "page" } %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Tasks", contractor_tasks_path, class: "nav-link text-white", aria: { current: "page" } %>
+          </li>
+          <%# <li class="nav-item">
+            <%= link_to "Applications", contractor_applications_path, class: "nav-link text-white", aria: { current: "page" } %>
+          </li> 
+        </ul>
+        <div>
+        <p class="h3"><%=current_user.role%></p>
+        </div>
+        <div>
+        <%= button_to " Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger fw-semibold shadow-sm" %>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

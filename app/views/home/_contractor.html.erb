@@ -1,0 +1,58 @@
+<div class="container mt-5 d-flex flex-column align-items-center text-center">
+  <!-- Profile Link or Create Profile -->
+  <div class="mb-4">
+    <% if current_user.profile.present? %>
+      <h3 class="text-primary">
+        <%= link_to "View Profile", profile_path(current_user), class: "text-decoration-none fw-bold" %>
+      </h3>
+    <% else %>
+      <h3 class="text-danger">
+        <%= link_to "Create a Profile", new_profile_path, class: "text-decoration-none fw-bold" %>
+      </h3>
+    <% end %>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="w-100">
+    <% if can? :read, Task %>
+      <%= link_to " View All Tasks", contractor_tasks_path, class: "btn btn-outline-primary w-100 py-2 mb-3 shadow-sm" %>
+    <% end %>
+
+    <%# <% if can? :read, Application %>
+      <%# <%= link_to " View All Applications", contractor_applications_path, class: "btn btn-outline-secondary w-100 py-2 mb-3 shadow-sm" %> 
+    <%# <% end %> 
+
+    <% if can? :create, Task %>
+      <%= link_to " Create New Task", new_contractor_task_path, class: "btn btn-outline-success w-100 py-2 mb-3 shadow-sm" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- Additional Custom Styles -->
+<style>
+  .btn {
+    border-radius: 30px; 
+    font-weight: 500; 
+  }
+
+  .btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transform: scale(1.02); 
+  }
+
+  h3 a {
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+
+  h3 a:hover {
+    color: #4B8F94; 
+  }
+
+  .container {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #fff;
+  }
+</style>

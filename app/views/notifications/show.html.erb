@@ -1,0 +1,10 @@
+
+<h1 class="text-center mb-4">Notification</h1>
+<div class="container mt-4">
+  <div class="card p-4 mb-4 shadow-sm rounded-lg">
+    <p class="fs-5"><strong>Task Category:</strong> <%= category(@notification.task) %></p>
+    <p class="fs-5"><strong>Location:</strong> <%= @notification.task.location %></p>
+    <p class="fs-5"><strong>Company:</strong> <%= @notification.task.company %></p>
+    <%= link_to "View Task",contractor_task_path(@notification.task), class: "btn btn-success btn-sm" %> 
+  </div>
+</div>

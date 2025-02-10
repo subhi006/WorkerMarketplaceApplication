@@ -1,0 +1,26 @@
+<h1 class="text-center mb-4">Your Applications</h1>
+
+<% if @applications.any? %>
+  <table class="table table-bordered table-striped">
+    <thead class="table-primary">
+      <tr>
+        <th>Task</th>
+        <th>Company</th>
+        <th>Applied On</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @applications.each do |application| %>
+        <tr>
+          <td><%= category(application.task) %></td>
+          <td><%= company(application.task)%></td>
+          <td><%= formate_date(application.created_at)%></td>
+          <td><%= application.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center">You haven't applied for any tasks yet.</p>
+<% end %>
