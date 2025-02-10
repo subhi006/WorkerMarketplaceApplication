@@ -6,6 +6,7 @@ class Task < ApplicationRecord
   has_many :workers, through: :applications
   has_many :notifications, dependent: :destroy
   enum :status, [ :not_available, :available ]
+  enum :work_status, [ :open, :assigned ]
 
   # after_create :send_creation_notification
   # Validations

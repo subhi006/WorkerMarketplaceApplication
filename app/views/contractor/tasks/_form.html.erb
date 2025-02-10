@@ -25,7 +25,7 @@
         <div class="col-md-6">
           <div class="mb-3">
             <%= form.label :duration, "Duration", class: "form-label" %><span style="color: red;">*</span>
-            <%= form.text_field :duration, class: "form-control", placeholder: "Enter duration (e.g., 3 months)" , required: true%>
+            <%= form.number_field  :duration, class: "form-control", placeholder: "Enter duration (e.g., 3 months)" , required: true%>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ class Profile < ApplicationRecord
   validates :name, presence: true, uniqueness: { message: "should enter unique name" }
   validates :contact_info, presence: true
   validate :check_avatar_presence
+  enum :work_status, [ :open, :assigned, :completed ]
   # validate :check_resume_presence
   def check_avatar_presence
     errors.add(:avatar, "no file added") unless avatar.attached?

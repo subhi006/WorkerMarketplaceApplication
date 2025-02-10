@@ -1,0 +1,49 @@
+<% if isassigned(@task)%>
+<h1 class="text-center mb-4"><%=category(@task)%></h1> 
+<div class="container mt-4">
+  <div class="card p-4 mb-4 shadow-sm rounded-lg">
+    <p class="fs-5"><strong>Company:</strong> <%= @task.company %></p>
+    <p class="fs-5"><strong>Duration:</strong> <%= @task.duration %></p>
+    <p class="fs-5"><strong>Location:</strong> <%= @task.location %></p>
+    <p class="fs-5"><strong>Shift Timing:</strong> <%= @task.sift %></p>
+    <p class="fs-5"><strong>Shift Hours:</strong> <%= @task.sift_hours %></p>
+    <p class="fs-5"><strong>Job Mode:</strong> <%= @task.job_mode %></p>
+    <p class="fs-5"><strong>Start Date:</strong> <%= formate_date(@task.start_date)%></p>
+    <p class="fs-5"><strong>End Date:</strong> <%= formate_date(end_date(@task))%></p>
+  </div>
+</div>
+<%# <%debugger%>
+</div>
+<div class="container mt-4">
+  <div class="card p-4 mb-4 shadow-sm rounded-lg">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Candidate Name</th>
+        <th>Status</th>
+        <th>view</th>
+        <th>Pyment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @applications.each_with_index do |application, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= name(application) %></td>
+          <td><%= work_progress(application) %></td>
+            <td>
+                <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
+            </td>
+            <td>
+                <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
+            </td>
+        </tr>
+        <%end%>
+    </tbody>
+  </table>
+<%else%>
+task was not Assined
+<%end%>
+
+

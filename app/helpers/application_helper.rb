@@ -14,4 +14,7 @@ module ApplicationHelper
   def task_applied(task)
     task.id.in? current_user.applications.pluck(:task_id)
   end
+  def end_date(task)
+    task.start_date + task.duration.years
+  end
 end

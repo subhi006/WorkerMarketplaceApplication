@@ -1,0 +1,36 @@
+<h1 class="text-center mb-4">List of Assined Task</h1>
+<% @tasks.each do |task|%>
+ <% if isassigned(task)%>
+   <div class="container mt-4">
+    <div class="card p-4 mb-4 shadow-sm rounded-lg">
+    <table class="table table-bordered table-striped">
+     <thead>
+       <tr>
+         <th>Task Name</th>
+         <th>Company</th>
+         <th>workers</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td>
+           <%=category(task)%>
+         </td>
+         <td>
+          <%= task.company%>
+          </td>
+          <td>
+          <%  task.workers.each  do |worker|%>
+            <%= worker.full_name%> <br>
+          <%end%>
+          </td>
+         <td>
+             <%= link_to "view",assigned_task_path(task), class: "btn btn-success btn-sm", method: :patch %>
+         </td>
+       </tr>
+      </tbody>
+    </table>
+    </div>
+   </div>
+  <%end%>
+<%end%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_053909) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_10_094929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -276,11 +276,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_053909) do
     t.integer "experience"
     t.string "skill"
     t.string "resume"
+    t.integer "work_status"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "duration"
+    t.integer "duration"
     t.decimal "salary"
     t.string "location"
     t.string "company"
@@ -296,6 +297,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_053909) do
     t.integer "applications_count"
     t.integer "status"
     t.integer "experience"
+    t.datetime "start_date"
+    t.integer "work_status"
     t.index ["category_id"], name: "index_tasks_on_category_id"
     t.index ["contractor_id"], name: "index_tasks_on_contractor_id"
   end

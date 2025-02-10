@@ -28,8 +28,10 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :assigned_tasks, only: [ :index, :show ]
+  # get "/assigned_tasks", to: "assigned_tasks#index", as: "assigned_tasks"
   get "/contractor/tasks/:task_id/applications", to:  "contractor/applications#per_task_appliation", as: "contractor_per_task_appliation"
-  get "/contractor/applications", to:  "contractor/applications#search", as: "contractor_application_search"
+  # get "/contractor/applications", to:  "contractor/applications#search", as: "contractor_application_search"
   namespace :worker do
     resources :tasks, only: [ :index, :show ] do
       resource :applications, only: [ :create ]
