@@ -17,4 +17,7 @@ module ApplicationHelper
   def end_date(task)
     task.start_date + task.duration.years
   end
+  def name(application)
+    application.worker.full_name
+  end
 end

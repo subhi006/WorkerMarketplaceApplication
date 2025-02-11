@@ -66,6 +66,7 @@ group :development, :test do
   gem "phonelib"
   gem "motor-admin"
   gem "carrierwave"
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -81,3 +82,4 @@ group :test do
 end
 
 gem "cssbundling-rails"
+gem "stripe"

@@ -23,7 +23,7 @@
         <th>Candidate Name</th>
         <th>Status</th>
         <th>view</th>
-        <th>Pyment</th>
+        <th>Payment</th>
       </tr>
     </thead>
     <tbody>
@@ -36,7 +36,8 @@
                 <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
             </td>
             <td>
-                <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
+                <%= button_to "Pay",  payments_path,params:{id: application.worker.id, salary:@task.salary},remote: true, class: "btn btn-success btn-sm" %>
+                <%# <%= button_to 'Pay', payments_path, method: :post %> %>
             </td>
         </tr>
         <%end%>

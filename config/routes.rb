@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   mount Motor::Admin => "/motor_admin"
+  resources :payments, only: [ :new, :create ]
+  # post "payments/create", to: "payments#create"
+  get "payments/success", to: "payments#success"
+  get "payments/cancel", to: "payments#cancel"
+
   devise_for :users
   resources :users
   root "home#index"
