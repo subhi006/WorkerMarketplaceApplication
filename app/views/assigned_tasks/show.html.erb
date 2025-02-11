@@ -8,8 +8,12 @@
     <p class="fs-5"><strong>Shift Timing:</strong> <%= @task.sift %></p>
     <p class="fs-5"><strong>Shift Hours:</strong> <%= @task.sift_hours %></p>
     <p class="fs-5"><strong>Job Mode:</strong> <%= @task.job_mode %></p>
-    <p class="fs-5"><strong>Start Date:</strong> <%= formate_date(@task.start_date)%></p>
-    <p class="fs-5"><strong>End Date:</strong> <%= formate_date(end_date(@task))%></p>
+    <% if @task.work_status.eql?("start")%>
+    <p class="fs-5"><strong>Start Date:</strong> <%= formate_date(@task.start_date) if @task.start_date.present?%></p>
+    <p class="fs-5"><strong>End Date:</strong> <%= formate_date(end_date(@task)) if @task.start_date.present? %></p>
+    <%else%>
+      <%= link_to "Start work", contractor_work_start_path(@task), class: "btn btn-success btn-sm", method: :patch %>
+     <%end%>
   </div>
 </div>
 <%# <%debugger%>
@@ -28,6 +32,7 @@
     </thead>
     <tbody>
       <% @applications.each_with_index do |application, index| %>
+      <%if employee(application)%>
         <tr>
           <td><%= index + 1 %></td>
           <td><%= name(application) %></td>
@@ -37,10 +42,10 @@
             </td>
             <td>
                 <%= button_to "Pay",  payments_path,params:{id: application.worker.id, salary:@task.salary},remote: true, class: "btn btn-success btn-sm" %>
-                <%# <%= button_to 'Pay', payments_path, method: :post %> %>
             </td>
         </tr>
         <%end%>
+       <%end%>
     </tbody>
   </table>
 <%else%>

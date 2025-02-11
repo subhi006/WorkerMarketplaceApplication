@@ -11,6 +11,9 @@ module ApplicationHelper
   def category(task)
     task.category.name
   end
+  def company(task)
+    task.company
+  end
   def task_applied(task)
     task.id.in? current_user.applications.pluck(:task_id)
   end

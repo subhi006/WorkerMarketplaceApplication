@@ -57,8 +57,14 @@
         <% if can? :add_resume, Profile%>
         <div class="col-md-6">
           <div class="mb-3">
-            <%= form.label :resume, "Resume", class: "form-label" %> <span style="color: red;">*</span>
-            <%= form.file_field :resume, multiple: true, class: "form-control", rows: 3, placeholder: "Enter photo URL", required: true %>
+            <%# <%= form.label :resume, "Resume", class: "form-label" %> <span style="color: red;">*</span> %>
+            <%# <%= form.file_field :resume, multiple: true, class: "form-control", rows: 3, placeholder: "Enter photo URL", required: true %> %>
+          </div>
+        </div>
+         <div class="col-md-6">
+          <div class="mb-3">
+            <%= form.label :myresume, "resume", class: "form-label" %> <span style="color: red;">*</span>
+            <%= form.file_field :myresume, class: "form-control", rows: 3, placeholder: "Enter photo URL", required: true %>
           </div>
         </div>
         <%end%>

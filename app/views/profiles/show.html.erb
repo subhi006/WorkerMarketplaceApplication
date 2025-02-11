@@ -13,7 +13,7 @@
         <% end %>
       </div>
       <div class="card shadow-sm p-4 mb-4">
-        <h4>User Information</h4>
+        <span><%= user_category(@profile)%> | <%= user_company(@profile)%></span>
         <p><strong>User Name:</strong> <%= @profile.name %></p>
         <p><strong>Address:</strong> <%= @profile.address %></p>
         <p><strong>Bio:</strong> <%= @profile.bio %></p>
@@ -22,14 +22,20 @@
         <p><strong>Full Name:</strong> <%= @profile.user.full_name %></p>
         <p><strong>Phone Number:</strong> <%= @profile.user.phone_number %></p>
         <p><strong>Role:</strong> <%= @profile.user.role %></p>
-
-        <!-- Resume -->
+         <%# <% if @profile.myresume? %> 
+          <%# <%= image_tag @profile.myresume%> 
         <p><strong>Resume:</strong>
-          <% if @profile.resume? %>
-            <%= image_tag @profile.user_resume, class: "btn btn-link" %>
-          <% else %>
-            <span>No resume uploaded</span>
-          <% end %>
+        <%= link_to rails_blob_path(@profile.myresume, disposition: "attachment") do %>
+          <%= image_tag @profile.myresume, alt: "Download file" %>
+        <% end %>
+        </p>
+        <!-- Resume -->
+        <%# <p><strong>Resume:</strong> %>
+          <%# <% if @profile.resume? %> 
+            <%# <%= image_tag @profile.user_resume, class: "btn btn-link" %> 
+          <%# <% else %> 
+            <%# <span>No resume uploaded</span> %>
+          <%# <% end %> 
         </p>
       </div>
       <% if current_user == @profile.user %>

@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   resources :assigned_tasks, only: [ :index, :show ]
   # get "/assigned_tasks", to: "assigned_tasks#index", as: "assigned_tasks"
   get "/contractor/tasks/:task_id/applications", to:  "contractor/applications#per_task_appliation", as: "contractor_per_task_appliation"
+  get "/contractor/tasks/:task_id/work_start", to:  "contractor/tasks#work_start", as: "contractor_work_start"
+  get "/profiles/:id/joining_status", to:  "profiles#joining_status", as: "joining_status"
+
   # get "/contractor/applications", to:  "contractor/applications#search", as: "contractor_application_search"
   namespace :worker do
     resources :tasks, only: [ :index, :show ] do

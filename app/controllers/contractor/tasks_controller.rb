@@ -1,7 +1,9 @@
 class Contractor::TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_contractor, only: [ :show, :edit, :update, :destroy ]
-  after_action :send_notification, only: [ :task_post ]
+  after_action :task_post_notification, only: [ :task_post ]
+  # after_action :work_start_notification, only: [ :work_start ]
+
   def index
     @tasks = current_user.tasks.application_count
     if @tasks.nil?
@@ -48,7 +50,13 @@ class Contractor::TasksController < ApplicationController
          redirect_to contractor_tasks_path
         end
   end
-
+ def work_start
+  @task = Task.find_by(id: params[:task_id])
+  # authorize! :approve, Application
+  if @task.update(work_status: "start", start_date: Date.today)
+   redirect_to assigned_task_path(@task), notice: "Task has been started."
+  end
+ end
   def destroy
     authorize! :destroy, @task
     if @task.destroy!
@@ -70,7 +78,7 @@ class Contractor::TasksController < ApplicationController
     params.expect(task: [ :duration, :location, :company, :description, :salary, :sift, :sift_hours, :job_mode, :experience, :number_of_position ])
   end
 
-  def send_notification
+  def task_post_notification
     CreateNotificationJob.perform_now(@task, current_user)
     NewTaskPostEmailJob.perform_later(@task)
   end

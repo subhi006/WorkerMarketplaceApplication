@@ -277,6 +277,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_094929) do
     t.string "skill"
     t.string "resume"
     t.integer "work_status"
+    t.integer "joining_status"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

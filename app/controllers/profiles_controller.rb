@@ -11,8 +11,6 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    # uploader = ResumeUploader.new
-    # uploader.store!(profile_params(:resume))
     authorize! :create, Profile
     @profile = current_user.build_profile(profile_params)
     if @profile.save
@@ -24,6 +22,13 @@ class ProfilesController < ApplicationController
 
   def edit
     authorize! :update, Profile
+  end
+  def joining_status
+    @profile = Profile.find(params[:id])
+    # authorize! :approve, Application
+    if @profile.update(joining_status: "accept")
+     redirect_to worker_applications_path, notice: "Task has been started."
+    end
   end
 
   def update
@@ -43,6 +48,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.expect(profile: [ :name, :bio, :contact_info, :address, :avatar, :resume, :experience, :skill ])
+    params.expect(profile: [ :name, :bio, :contact_info, :address, :avatar, :resume, :experience, :skill, :myresume ])
   end
 end
