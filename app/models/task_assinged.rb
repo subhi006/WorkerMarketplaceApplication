@@ -1,0 +1,2 @@
+class TaskAssinged < ApplicationRecord
+end

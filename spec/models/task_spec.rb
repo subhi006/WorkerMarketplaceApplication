@@ -1,14 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  let(:category) { create(:category) }
-  let(:user) { create(:user, role: "contractor") }
-  let(:task) { build(:task, category: category, contractor: user) }
-
-
+  let(:task) { FactoryBot.build(:task) }
   describe "Validations" do
     context "should validate" do
-      it "with salary, company, description, location, and category" do
+      it "with salary, company, description, location, experience and category" do
         expect(task).to be_valid
       end
     end
@@ -43,7 +39,11 @@ RSpec.describe Task, type: :model do
         task.salary = -5
         expect(task).not_to be_valid
       end
+
+      it "when experience is not 0 or geater than 0" do
+        task.experience = -3
+        expect(task).not_to be_valid
+      end
     end
   end
-  pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -10,11 +10,11 @@ class Contractor::ApplicationsController < ApplicationController
     authorize! :read, Application
     if params[:q].present?
         @q = Profile.ransack(params[:q])
-        @profile = @q.result
+        @profile = @q.result.order(updated_at: :desc)
         @applications = Application.where(task_id: params[:task_id]).includes(worker: [ :profile ])
     else
     @q =Application.where(task_id: params[:task_id]).includes(worker: [ :profile ]).ransack(params[:q])
-    @applications = @q.result
+    @applications = @q.result.order(updated_at: :desc)
     end
   end
 

@@ -8,7 +8,6 @@
         <th>Company</th>
         <th>Applied On</th>
         <th>Status</th>
-        <th>joined</th>
       </tr>
     </thead>
     <tbody>
@@ -19,13 +18,6 @@
           <td><%= formate_date(application.created_at)%></td>
           <td><%= application.status %></td>
           <td>
-          <% if application.status.eql?("approved")%>
-          <%if application.worker.profile.joining_status.eql?("deny") %>
-              <%= link_to "Join", joining_status_path(application.worker.profile), class: "btn btn-success btn-sm", method: :patch %>
-          <%else%>
-              <p> joined </p>
-          <%end%>
-          <%end%>
           </td>
         </tr>
       <% end %>

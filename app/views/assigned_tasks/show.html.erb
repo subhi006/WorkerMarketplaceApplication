@@ -27,25 +27,27 @@
         <th>Candidate Name</th>
         <th>Status</th>
         <th>view</th>
+        <th>Review and Rating</th>
         <th>Payment</th>
       </tr>
     </thead>
     <tbody>
       <% @applications.each_with_index do |application, index| %>
-      <%if employee(application)%>
         <tr>
           <td><%= index + 1 %></td>
           <td><%= name(application) %></td>
           <td><%= work_progress(application) %></td>
             <td>
-                <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
+              <%= link_to "view_profile",  profile_path(application.worker), class: "btn btn-success btn-sm", method: :patch %>
             </td>
             <td>
-                <%= button_to "Pay",  payments_path,params:{id: application.worker.id, salary:@task.salary},remote: true, class: "btn btn-success btn-sm" %>
+              <%# <%= link_to  "click",   new_reviews_path, class: "btn btn-success btn-sm" %> 
+            </td>
+            <td>
+              <%= button_to "Pay",  payments_path,params:{id: application.worker.id, task_id: @task.id},remote: true, class: "btn btn-success btn-sm" %>
             </td>
         </tr>
         <%end%>
-       <%end%>
     </tbody>
   </table>
 <%else%>

@@ -7,5 +7,6 @@ FactoryBot.define do
     category
     contractor { create(:user, role: "contractor") }
     status { :available }
+    experience { 3 }
   end
 end

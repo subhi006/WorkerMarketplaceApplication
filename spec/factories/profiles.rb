@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :profile do
     user
-    name { "MyString" }
-    bio { "MyText" }
-    contact_info { "MyString" }
-    address { "MyString" }
+    name { "Subhi" }
+    bio { "Ruby Developer" }
+    contact_info { "123456789" }
+    address { "Indore" }
     avatar { "MyString" }
   end
 end

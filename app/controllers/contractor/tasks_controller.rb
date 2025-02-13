@@ -1,28 +1,29 @@
 class Contractor::TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_contractor, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_contractor, only: [ :show, :edit, :update, :destroy, :work_start, :task_post ]
   after_action :task_post_notification, only: [ :task_post ]
   # after_action :work_start_notification, only: [ :work_start ]
 
   def index
-    @tasks = current_user.tasks.application_count
+    authorize! :read, Task
+    @tasks = Task.where(contractor: current_user).application_count.order(updated_at: :desc)
     if @tasks.nil?
       flash[:alert] = "Task not found."
       redirect_to contractor_tasks_path
     end
   end
   def show
-    authorize! :read, @task
+    authorize! :read, Task
     @application = @task.applications
   end
   def new
     @task = Task.new
-    authorize! :create, @task
+    authorize! :create, Task
     @categories = Category.all
   end
   def create
     @task = Task.new(task_params)
-    authorize! :create, @task
+    authorize! :create, Task
     if @task.save
         redirect_to contractor_tasks_path, notice: "Task was successfully created."
     else
@@ -31,34 +32,31 @@ class Contractor::TasksController < ApplicationController
   end
 
   def edit
-    authorize! :update, @task
+    authorize! :update, Task
   end
 
   def update
-    @task =Task.find(params[:id])
-    authorize! :update, @task
+    authorize! :update, Task
     if @task.update(update_task_params)
       redirect_to contractor_tasks_path
     end
   end
 
   def task_post
-        @task = Task.find(params[:id])
-        @task.status="available"
-        authorize! :post_task, @task
-        if @task.save
-         redirect_to contractor_tasks_path
-        end
+    @task.status="available"
+    authorize! :post_task, Task
+    if @task.save
+      redirect_to contractor_tasks_path
+    end
   end
- def work_start
-  @task = Task.find_by(id: params[:task_id])
-  # authorize! :approve, Application
-  if @task.update(work_status: "start", start_date: Date.today)
-   redirect_to assigned_task_path(@task), notice: "Task has been started."
+  def work_start
+    authorize! :work_start, Task
+    if @task.update(work_status: "start", start_date: Date.today)
+      redirect_to assigned_task_path(@task), notice: "Task has been started."
+    end
   end
- end
   def destroy
-    authorize! :destroy, @task
+    authorize! :destroy, Task
     if @task.destroy!
       redirect_back contractor_tasks_path, notice: "Task was successfully destroyed"
     end
@@ -74,6 +72,7 @@ class Contractor::TasksController < ApplicationController
     data[:contractor]=current_user
     data
   end
+
   def update_task_params
     params.expect(task: [ :duration, :location, :company, :description, :salary, :sift, :sift_hours, :job_mode, :experience, :number_of_position ])
   end

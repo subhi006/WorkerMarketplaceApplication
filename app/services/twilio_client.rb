@@ -3,7 +3,7 @@ require "twilio-ruby"
 class TwilioClient
     attr_reader :client
     def initialize
-            @client = Twilio::REST::Client.new "AC880628ac290278ba72c063ac93deaf33", "e6606410dde3186a0b31dcc9ed133aeb"
+            @client = Twilio::REST::Client.new "AC880628ac290278ba72c063ac93deaf33", "25b7d63e88988d697f90d8efc02f714b"
     end
 
     def send_text(user, message)

@@ -2,8 +2,10 @@
 <div class="card shadow-lg p-4 mx-auto" style="max-width: 500px;"><!DOCTYPE html>
   <section>
     <p>
-      Payment successfully send to user 
-
+      Payment successfully send</p>
+     <p> Employee Name : <%=@user.full_name%></p>
+     <p>salary : <%=@task.salary%></p>
     </p>
+    <%= link_to "Back",assigned_task_path(@task)%>
   </section>
   <div>

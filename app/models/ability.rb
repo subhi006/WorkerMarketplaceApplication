@@ -25,6 +25,7 @@ class Ability
       can :destroy, Task, contractor_id: user.id
       can :post_task, Task, contractor_id: user.id
       can :read, Task
+      can :work_start, Task
       can :read, Application, task: { contractor_id: user.id }
       can :approve, Application
       can :reject, Application
@@ -32,6 +33,7 @@ class Ability
       can :create, Profile, contractor_id: user.id
       can :read, Profile, contractor_id: user.id
       can :update, Profile, contractor_id: user.id
+      # can :create, Payments
     end
     # Define abilities for the user here. For example:
     #

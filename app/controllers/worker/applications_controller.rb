@@ -3,13 +3,13 @@ class Worker::ApplicationsController < ApplicationController
   after_action :new_application_email, only: [ :create ]
   def index
     authorize! :read, Application
-    @applications = Application.where(worker: current_user).includes(task: [ :category ])
+    @applications = Application.where(worker: current_user).includes(task: [ :category ]).order(created_at: :desc)
   end
 
   def create
+    authorize! :create, Application
     if current_user.profile
       @task = Task.find(params[:task_id])
-      authorize! :create, Application
       @application = @task.applications.new(worker: current_user, status: "applied")
       if @application.save
         flash[:success] = "Application submitted successfully"
@@ -30,6 +30,7 @@ class Worker::ApplicationsController < ApplicationController
   def application_params
     params.expect(application: [ :id ])
   end
+
   def new_application_email
     NewApplicationEmailJob.perform_later(@task)
   end

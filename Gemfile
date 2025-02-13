@@ -54,19 +54,20 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "devise"
   gem "cancancan"
-  # gem "bootstrap"
-  # gem "sassc-rails"
-  gem "dartsass-rails"
-  gem "bootstrap", "~> 5.3.3"
+
   gem "image_processing"
   gem "ruby-vips"
   gem "ransack", github: "activerecord-hackery/ransack"
   gem "poppler"
   gem "twilio-ruby"
   gem "phonelib"
-  gem "motor-admin"
+
+  # gem "motor-admin"
   gem "carrierwave"
   gem "dotenv-rails"
+  gem "activeadmin"
+  gem "draper"
+  gem "pundit"
 end
 
 group :development do

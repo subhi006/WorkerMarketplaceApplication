@@ -1,28 +1,26 @@
 <div class="container mt-4">
   <div class="text-center">
-    <% if current_user.profile.present? %>
-      <h1 class="text-primary">
-        <%= link_to "Profile", profile_path(current_user), class: "text-decoration-none text-primary fw-bold" %>
-      </h1>
-    <% else %>
-      <h1 class="text-danger">
-        <%= link_to "Create a Profile", new_profile_path, class: "text-decoration-none text-danger fw-bold" %>
-      </h1>
-    <% end %>
-  </div>
-
-  <div class="mt-4 d-flex flex-column align-items-center">
-    <% if can? :read, Task %>
-      <%= link_to " View All Tasks", worker_tasks_path, class: "btn btn-outline-primary w-100 py-2 mb-3 fw-semibold shadow-sm rounded-pill" %>
-    <% end %>
-
-    <% if can? :read, Application %>
-      <%= link_to " View All Applications", worker_applications_path, class: "btn btn-outline-secondary w-100 py-2 mb-3 fw-semibold shadow-sm rounded-pill" %>
-    <% end %>
+    <h1 class="text-primary"> JobYatra <h1>
+    <div class="mt-4 d-flex flex-column align-items-center">
+      <% if current_user.profile.present? %>
+          <% if can? :read, Profile %>
+            <%= link_to "Profile", profile_path(current_user), class: "btn btn-outline-primary w-100 py-2 mb-3 fw-semibold shadow-sm rounded-pill" %>
+          <%end%>
+      <% else %>
+          <% if can? :create, Profile %>
+            <%= link_to "Create a Profile", new_profile_path, class: "btn btn-outline-primary w-100 py-2 mb-3 fw-semibold shadow-sm rounded-pill" %>
+          <%end%>
+      <% end %>
+      <% if can? :read, Task %>
+        <%= link_to " View All Tasks", worker_tasks_path, class: "btn btn-outline-primary w-100 py-2 mb-3 fw-semibold shadow-sm rounded-pill" %>
+      <% end %>
+      <% if can? :read, Application %>
+        <%= link_to " View All Applications", worker_applications_path, class: "btn btn-outline-secondary w-100 py-2 mb-3 fw-semibold shadow-sm rounded-pill" %>
+      <% end %>
   </div>
 </div>
 
-<!-- Additional Custom Styles -->
+
 <style>
   .btn {
     border-radius: 25px; 

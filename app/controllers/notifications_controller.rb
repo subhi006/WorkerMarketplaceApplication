@@ -16,12 +16,4 @@ class NotificationsController < ApplicationController
     @notification.update(status: "read")
     render :show
   end
-
-  def new
-    @notification = Notification.new
-  end
-
-  def create
-    @notification = Notification.new(notification_params)
-  end
 end

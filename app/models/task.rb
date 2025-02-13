@@ -34,13 +34,6 @@ class Task < ApplicationRecord
       .order("COUNT(applications.id)")
     }
 
-    # def self.search(search)
-    #   if @task=Task.where(category_id: Category.search_category(search).ids, status: "available")
-    #     @task
-    #   else
-    #     @task=Task.where(status: "available")
-    #   end
-    # end
     def capitalize_fields
       self.location = location.capitalize if location.present?
       self.company = company.capitalize if company.present?

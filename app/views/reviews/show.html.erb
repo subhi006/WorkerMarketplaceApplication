@@ -1,0 +1,9 @@
+<h2>Reviews</h2>
+<% @task.reviews.each do |review| %>
+  <p>
+    <strong>Rating:</strong> <%= review.rating %> / 5<br>
+    <strong>Comment:</strong> <%= review.comment %>
+  </p>
+<% end %>
+
+<%= link_to 'Write a Review', new_task_review_path(@task) %> if current_user == @task.contractor %>

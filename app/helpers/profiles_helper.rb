@@ -1,10 +1,4 @@
 module ProfilesHelper
-  def download_pdf(myresume)
-    client = Client.find(params[:id])
-    send_data generate_pdf(client),
-              filename: "#{client.name}.pdf",
-              type: "application/pdf"
-  end
   def status(status)
         if status.work_status.eql?("open")
           "Open to work"

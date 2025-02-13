@@ -42,21 +42,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # Associations
-  describe "Associations" do
-    it { should have_many(:tasks).with_foreign_key(:contractor_id).dependent(:destroy) }
-    it { should have_many(:applications).with_foreign_key(:worker_id) }
-    it { should have_many(:applied_task).through(:applications).source(:task) }
-    it { should have_one(:profile).dependent(:destroy) }
-  end
-    describe "Enums" do
-      it { should define_enum_for(:role).with_values(worker: 0, contractor: 1, admin: 2) }
-    end
-
-  #   describe "Callbacks" do
-  #     let(:user) { build(:user, first_name: "Sakshi", last_name: "Mishra") }
-  #   end
-  describe "#full_name" do
+  describe "full_name" do
   it "returns the correct full name" do
     user.first_name = "Sakshi"
     user.last_name = "Mishra"

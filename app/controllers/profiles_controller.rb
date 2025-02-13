@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def new
+    authorize! :create, Profile
     @profile = Profile.new
   end
 
@@ -23,14 +24,6 @@ class ProfilesController < ApplicationController
   def edit
     authorize! :update, Profile
   end
-  def joining_status
-    @profile = Profile.find(params[:id])
-    # authorize! :approve, Application
-    if @profile.update(joining_status: "accept")
-     redirect_to worker_applications_path, notice: "Task has been started."
-    end
-  end
-
   def update
     @profile = Profile.find(params[:id])
     authorize! :update, Profile

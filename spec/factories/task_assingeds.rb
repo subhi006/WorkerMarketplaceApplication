@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :admin_user do
+  factory :task_assinged do
     
   end
 end

@@ -3,43 +3,34 @@
   <div class="alert alert-success text-center fw-bold" role="alert">
     Welcome, <%= current_user.email %>!
   </div> 
-
   <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card shadow-lg rounded-lg p-3" style="width: 100%; max-width: 1000px;">
       <div class="card-body text-center">
-        
-        <!-- Role-Based Partial Rendering -->
         <% if current_user.worker? %>
           <%= render partial: "worker" %>
         <% elsif current_user.contractor? %>
           <%= render partial: "contractor" %>
         <%elsif current_user.admin? %>
-        <div>
-          <h3><strong><%= link_to "Admin", motor_admin_path %></strong></h3>
-        </div>
-        <%else%>
-        
+          <div>
+           <h3><strong><%= link_to "Admin", motor_admin_path %></strong></h3>
+          </div>        
         <% end %>
 
-        <!-- Sign Out Button -->
         <div class="mt-4">
           <%= button_to " Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger w-50 fw-semibold shadow-sm" %>
         </div>
       </div>
     </div>
   </div>
-
 <% else %>
-  <!-- Not Signed In: Show Sign In and Sign Up Options -->
   <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card shadow-lg rounded-lg p-4 text-center" style="width: 100%; max-width: 600px;">
       <div class="card-body">
         <h2 class="mb-4 text-primary fw-bold">Welcome to Our Platform</h2>
         <p class="text-muted">Join us to connect with contractors and workers effortlessly.</p>
-
         <div class="mt-4">
           <%= link_to " Sign In", new_user_session_path, class: "btn btn-primary w-75 py-2 fw-semibold shadow-sm mb-3" %> 
-          <%= link_to " Sign Up", new_user_registration_path, class: "btn btn-outline-primary w-75 py-2 fw-semibold shadow-sm" %> 
+          <%= link_to " Sign Up", new_user_registration_path, class: "btn btn-outline-primary w-75 py-2 fw-semibold shadow-sm"  %>
         </div>
       </div>
     </div>

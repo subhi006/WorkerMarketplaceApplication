@@ -9,7 +9,4 @@ module AssignedTasksHelper
   def work_progress(application)
     application.worker.profile.work_status
   end
-  def employee(application)
-    application.worker.profile.joining_status.eql?("accept")
-  end
 end
